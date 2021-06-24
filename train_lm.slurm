@@ -5,7 +5,7 @@
 #SBATCH --time=23:00:00
 #SBATCH --mem=128G
 #SBATCH --job-name=fine_tune_gpt2
-#SBATCH --mail-user=nm3571@nyu.edu
+#SBATCH --mail-user=yk2516@nyu.edu
 #SBATCH --output=slurm_train_%j.out
 
 ## Finetuning gpt2 on gigaword train and validation
