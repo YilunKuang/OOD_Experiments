@@ -5,7 +5,7 @@
 #SBATCH --time=23:00:00
 #SBATCH --mem=128G
 #SBATCH --job-name=fine_tune_gpt2
-#SBATCH --mail-user=yk2516@nyu.edu
+#SBATCH --mail-user=nm3571@nyu.edu
 #SBATCH --output=slurm_train_%j.out
 
 ## Finetuning gpt2 on gigaword train and validation
@@ -101,12 +101,22 @@
 # --do_predict --eval_accumulation_steps 20 --output_dir /scratch/nm3571/ 
 # --per_device_eval_batch_size=1 --cache_dir /scratch/nm3571/cache'
 
-## Testing fine-tuned gpt2 on XSum test set
-singularity exec --nv --overlay $SCRATCH/overlay-50G-10M.ext3:rw /scratch/work/public/singularity/cuda10.1-cudnn7-devel-ubuntu18.04-20201207.sif /bin/bash -c '
+## Testing fine-tuned gpt2 on XSum test set - change to 85 examples
+# singularity exec --nv --overlay $SCRATCH/overlay-50G-10M.ext3:ro /scratch/work/public/singularity/cuda10.1-cudnn7-devel-ubuntu18.04-20201207.sif /bin/bash -c '
 
-echo "Running - evaluating finetuned gpt2 on XSum"
+# echo "Running - evaluating finetuned gpt2 on XSum"
+# source /ext3/env.sh
+# conda activate
+
+# python -u run_clm.py --model_name_or_path /scratch/yk2516/OOD_Text_Generation/checkpoint-36000 --dataset_name xsum --do_predict --eval_accumulation_steps 20 --output_dir /scratch/yk2516/OOD_Text_Generation/GPT2-XSum --per_device_eval_batch_size=1 --cache_dir /scratch/yk2516/cache'
+
+
+## Testing fine-tuned gpt2 on CNN Dailymail test set - change to 85 examples
+
+singularity exec --nv --overlay $SCRATCH/overlay-50G-10M.ext3:ro /scratch/work/public/singularity/cuda10.1-cudnn7-devel-ubuntu18.04-20201207.sif /bin/bash -c '
+
+echo "Running - evaluating finetuned gpt2 on CNN Dailymail"
 source /ext3/env.sh
 conda activate
 
-python -u run_clm.py --model_name_or_path /scratch/yk2516/OOD_Text_Generation/checkpoint-36000 --dataset_name xsum --do_predict --eval_accumulation_steps 20 --output_dir /scratch/yk2516/OOD_Text_Generation/GPT2-XSum --per_device_eval_batch_size=1 --cache_dir /scratch/yk2516/cache'
-
+python -u run_clm.py --model_name_or_path /scratch/yk2516/OOD_Text_Generation/checkpoint-36000 --dataset_name cnn_dailymail --do_predict --eval_accumulation_steps 20 --output_dir /scratch/yk2516/OOD_Text_Generation/GPT2-CNN --per_device_eval_batch_size=1 --cache_dir /scratch/yk2516/cache'
