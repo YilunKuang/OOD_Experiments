@@ -101,7 +101,10 @@
 # --do_predict --eval_accumulation_steps 20 --output_dir /scratch/nm3571/ 
 # --per_device_eval_batch_size=1 --cache_dir /scratch/nm3571/cache'
 
+# -------------------------------------------------------------------------#
 ## Testing fine-tuned gpt2 on XSum test set - change to 85 examples
+# -------------------------------------------------------------------------#
+
 # singularity exec --nv --overlay $SCRATCH/overlay-50G-10M.ext3:ro /scratch/work/public/singularity/cuda10.1-cudnn7-devel-ubuntu18.04-20201207.sif /bin/bash -c '
 
 # echo "Running - evaluating finetuned gpt2 on XSum"
@@ -110,7 +113,10 @@
 
 # python -u run_clm.py --model_name_or_path /scratch/yk2516/OOD_Text_Generation/checkpoint-36000 --dataset_name xsum --do_predict --eval_accumulation_steps 20 --output_dir /scratch/yk2516/OOD_Text_Generation/GPT2-XSum --per_device_eval_batch_size=1 --cache_dir /scratch/yk2516/cache'
 
+# -------------------------------------------------------------------------#
 # Testing vanilla gpt2 on XSum test set - change to 85 examples
+# -------------------------------------------------------------------------#
+
 # singularity exec --nv --overlay $SCRATCH/overlay-50G-10M.ext3:ro /scratch/work/public/singularity/cuda10.1-cudnn7-devel-ubuntu18.04-20201207.sif /bin/bash -c '
 
 # echo "Running - evaluating vanilla gpt2 on XSum"
@@ -119,13 +125,27 @@
 
 # python -u run_clm.py --model_name_or_path gpt2 --dataset_name xsum --do_predict --eval_accumulation_steps 20 --output_dir /scratch/yk2516/OOD_Text_Generation/GPT2-XSum --per_device_eval_batch_size=1 --cache_dir /scratch/yk2516/cache'
 
-
+# -------------------------------------------------------------------------#
 # Testing fine-tuned gpt2 on CNN Dailymail test set - change to 85 examples
+# -------------------------------------------------------------------------#
 
+# singularity exec --nv --overlay $SCRATCH/overlay-50G-10M.ext3:ro /scratch/work/public/singularity/cuda10.1-cudnn7-devel-ubuntu18.04-20201207.sif /bin/bash -c '
+
+# echo "Running - evaluating finetuned gpt2 on CNN Dailymail"
+# source /ext3/env.sh
+# conda activate
+
+# python -u run_clm.py --model_name_or_path /scratch/yk2516/OOD_Text_Generation/checkpoint-36000 --dataset_name cnn_dailymail --dataset_config_name 3.0.0 --do_predict --eval_accumulation_steps 20 --output_dir /scratch/yk2516/OOD_Text_Generation/GPT2-CNN --per_device_eval_batch_size=1 --cache_dir /scratch/yk2516/cache'
+
+# -------------------------------------------------------------------------#
+# Testing vanilla gpt2 on CNN Dailymail test set - change to 85 examples
+# -------------------------------------------------------------------------#
 singularity exec --nv --overlay $SCRATCH/overlay-50G-10M.ext3:ro /scratch/work/public/singularity/cuda10.1-cudnn7-devel-ubuntu18.04-20201207.sif /bin/bash -c '
 
-echo "Running - evaluating finetuned gpt2 on CNN Dailymail"
+echo "Running - evaluating vanilla gpt2 on CNN Dailymail"
 source /ext3/env.sh
 conda activate
 
-python -u run_clm.py --model_name_or_path /scratch/yk2516/OOD_Text_Generation/checkpoint-36000 --dataset_name cnn_dailymail --dataset_config_name 3.0.0 --do_predict --eval_accumulation_steps 20 --output_dir /scratch/yk2516/OOD_Text_Generation/GPT2-CNN --per_device_eval_batch_size=1 --cache_dir /scratch/yk2516/cache'
+python -u run_clm.py --model_name_or_path gpt2 --dataset_name cnn_dailymail --dataset_config_name 3.0.0 --do_predict --eval_accumulation_steps 20 --output_dir /scratch/yk2516/OOD_Text_Generation/GPT2-CNN --per_device_eval_batch_size=1 --cache_dir /scratch/yk2516/cache'
+
+
