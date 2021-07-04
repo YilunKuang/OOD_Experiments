@@ -17,7 +17,7 @@ source /ext3/env.sh
 conda activate
 
 python run_summarization.py \
-    --model_name_or_path bart-large \
+    --model_name_or_path facebook/bart-large \
     --do_train \
     --do_eval \
     --dataset_name gigaword \
