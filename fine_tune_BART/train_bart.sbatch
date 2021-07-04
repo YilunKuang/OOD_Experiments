@@ -4,16 +4,15 @@
 #SBATCH --gres=gpu:1
 #SBATCH --time=23:00:00
 #SBATCH --mem=128G
-#SBATCH --job-name=fine_tune_gpt2
+#SBATCH --job-name=fine_tune_bart_on_gigaword
 #SBATCH --mail-user=yk2516@nyu.edu
-#SBATCH --output=slurm_train_%j.out
+#SBATCH --output=slurm_bart_on_gigaword_%j.out
 
-
-## Testing fine-tuned gpt2 on CNN Dailymail test set - change to 85 examples
+## fine-tune vanilla bart on gigaword
 
 singularity exec --nv --overlay $SCRATCH/overlay-50G-10M.ext3:ro /scratch/work/public/singularity/cuda10.1-cudnn7-devel-ubuntu18.04-20201207.sif /bin/bash -c '
 
-echo "Running - Fine tune BART on Gigaword"
+echo "Running - fine tune BART on gigaword"
 source /ext3/env.sh
 conda activate
 
