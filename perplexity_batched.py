@@ -7,7 +7,7 @@ import numpy as np
 
 
 def main():
-    model_checkpoint = 'facebook/bart-large-cnn' #'a1noack/bart-large-gigaword' #'facebook/bart-base'  #'facebook/bart-large-cnn'
+    model_checkpoint = 'facebook/bart-large' #'a1noack/bart-large-gigaword' #'facebook/bart-base'  #'facebook/bart-large-cnn'
     tokenizer = BartTokenizerFast.from_pretrained(model_checkpoint)
     model = BartForConditionalGeneration.from_pretrained(model_checkpoint, return_dict=True)
     device = "cuda" if torch.cuda.is_available() else "cpu"
