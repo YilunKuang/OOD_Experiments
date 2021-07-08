@@ -15,4 +15,4 @@ echo "Running - evaluating finetuned BART on XSum"
 source /ext3/env.sh
 conda activate
 
-python -u perplexity_beam.py'
+python -u perplexity_batched.py'
