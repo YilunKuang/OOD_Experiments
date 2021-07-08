@@ -7,7 +7,7 @@ import numpy as np
 
 
 def main():
-    model_checkpoint = 'facebook/bart-large-cnn' # 'a1noack/bart-large-gigaword' #'facebook/bart-base'  
+    model_checkpoint = 'a1noack/bart-large-gigaword' #'facebook/bart-large' #'a1noack/bart-large-gigaword' #'facebook/bart-base'  #'facebook/bart-large-cnn'
     tokenizer = BartTokenizerFast.from_pretrained(model_checkpoint)
     model = BartForConditionalGeneration.from_pretrained(model_checkpoint, return_dict=True)
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -15,7 +15,9 @@ def main():
     # test = load_dataset("wikihow", "all", data_dir="/scratch/nm3571", split='test')
     # test = load_dataset("gigaword", split='test')
     # test = load_dataset("big_patent", "g", split='test')
-    test = load_dataset("xsum", download_mode="force_redownload", cache_dir='/scratch/yk2516/cache/',split='test[:]')
+    # test = load_dataset("xsum",cache_dir='/scratch/yk2516/cache/', split='test[:]')
+    # test = load_dataset("cnn_daily",cache_dir='/scratch/yk2516/cache/', split='test[:]')
+    test = load_dataset("cnn_dailymail", '3.0.0',download_mode="force_redownload",split='test[:]', cache_dir='/scratch/yk2516/cache/')
 
     print(test)
     print(model.config.max_length)
