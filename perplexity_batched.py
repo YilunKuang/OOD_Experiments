@@ -15,7 +15,7 @@ def main():
     # test = load_dataset("wikihow", "all", data_dir="/scratch/nm3571", split='test')
     # test = load_dataset("gigaword", split='test')
     # test = load_dataset("big_patent", "g", split='test')
-    test = load_dataset("xsum", download_mode="force_redownload", cache_dir='/scratch/nm3571/cache/')
+    test = load_dataset("xsum", download_mode="force_redownload", cache_dir='/scratch/yk2516/cache/')
 
     print(test)
     print(model.config.max_length)
