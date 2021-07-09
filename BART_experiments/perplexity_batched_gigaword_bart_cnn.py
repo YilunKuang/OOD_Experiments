@@ -18,7 +18,7 @@ def main():
     # test = load_dataset("xsum",cache_dir='/scratch/yk2516/cache/', split='test[:]')
     # test = load_dataset("cnn_daily",cache_dir='/scratch/yk2516/cache/', split='test[:]')
     # test = load_dataset("cnn_dailymail", name='3.0.0',download_mode="force_redownload",split='test', cache_dir='/scratch/yk2516/cache/')
-    test = load_dataset(path="cnn_dailymail",name='3.0.0',split='test')
+    test = load_dataset(path="cnn_dailymail",name='3.0.0',split='test',cache_dir='/scratch/yk2516/cache/')
     
     print(test)
     print(model.config.max_length)
