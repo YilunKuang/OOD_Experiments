@@ -244,7 +244,10 @@ def main():
     # download the dataset.
     if data_args.dataset_name is not None:
         # Downloading and loading a dataset from the hub.
-        datasets = load_dataset(data_args.dataset_name, data_args.dataset_config_name,cache_dir=model_args.cache_dir, data_dir=data_args.data_dir)
+        # datasets = load_dataset(data_args.dataset_name, data_args.dataset_config_name,cache_dir=model_args.cache_dir, data_dir=data_args.data_dir)
+        datasets = load_dataset(path="cnn_dailymail",name='3.0.0',split='test',cache_dir=model_args.cache_dir)#, data_dir=data_args.data_dir)
+    # path="cnn_dailymail",name='3.0.0',split='test',
+    
     #     if "validation" not in datasets.keys():
     #         datasets["validation"] = load_dataset(
     #             data_args.dataset_name,
