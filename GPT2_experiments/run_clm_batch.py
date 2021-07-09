@@ -243,12 +243,8 @@ def main():
     # In distributed training, the load_dataset function guarantee that only one local process can concurrently
     # download the dataset.
     if data_args.dataset_name is not None:
-    #     # Downloading and loading a dataset from the hub.
-        # ------------------------------------------ # 
-        # uncomment if attempt failed
-        # datasets = load_dataset(data_args.dataset_name, data_args.dataset_config_name,cache_dir=model_args.cache_dir, data_dir=data_args.data_dir)
-        datasets = load_dataset(data_args.dataset_name, data_args.dataset_config_name, download_mode="force_redownload",cache_dir=model_args.cache_dir, data_dir=data_args.data_dir)
-        # ------------------------------------------ # 
+        # Downloading and loading a dataset from the hub.
+        datasets = load_dataset(data_args.dataset_name, data_args.dataset_config_name,cache_dir=model_args.cache_dir, data_dir=data_args.data_dir)
     #     if "validation" not in datasets.keys():
     #         datasets["validation"] = load_dataset(
     #             data_args.dataset_name,
@@ -289,24 +285,13 @@ def main():
     # The .from_pretrained methods guarantee that only one local process can concurrently
     # download model & vocab.
     if data_args.dataset_name is not None:
-# ------------------------------------------ # 
-# uncomment if attempt failed
-#         datasets["test"] = load_dataset(
-#                 data_args.dataset_name,
-#                 data_args.dataset_config_name,
-#                 split=f"test",
-#                 cache_dir=model_args.cache_dir,
-#                 data_dir=data_args.data_dir,
-#             )
         datasets["test"] = load_dataset(
                 data_args.dataset_name,
                 data_args.dataset_config_name,
-                download_mode="force_redownload",
                 split=f"test",
                 cache_dir=model_args.cache_dir,
                 data_dir=data_args.data_dir,
             )
-# ------------------------------------------ # 
         logger.info("Test dataset object", datasets["test"])
 
     config_kwargs = {
