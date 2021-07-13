@@ -49,7 +49,7 @@ def main():
         with torch.no_grad():
             result = model.generate(input_ids=input_id, attention_mask=attention_id, num_beams=number_beams, return_dict_in_generate=True, max_length=model.config.max_length, output_scores=True, output_attentions=True)
         
-        generated_summary = tokenizer.decode(result, skip_special_tokens=True, clean_up_tokenization_spaces=False)
+        generated_summary = tokenizer.decode(result, skip_special_tokens=True) #, clean_up_tokenization_spaces=False)
         rouge.add_batch(predictions=generated_summary, references=test['summary'][i])
     score = rouge.compute()
     print('Rouge: ')
