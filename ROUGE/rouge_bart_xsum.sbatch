@@ -10,10 +10,10 @@
 
 
 singularity exec --nv --overlay $SCRATCH/overlay-50G-10M.ext3:ro /scratch/work/public/singularity/cuda10.1-cudnn7-devel-ubuntu18.04-20201207.sif /bin/bash -c '
-echo "Running - evaluating vailla BART on XSum (Rouge)"
+echo "Running - evaluating fine-tuned BART (Gigaword) on XSum (Rouge)"
 source /ext3/env.sh
 conda activate
-python -u rouge_bart_vanilla_xsum.py'
+python -u rouge_bart_gigaword_xsum.py'
 
 
 
