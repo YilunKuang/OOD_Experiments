@@ -40,6 +40,7 @@ def main():
     print("number of samples:", ids.shape[0])
     
     rouge = load_metric('rouge')
+    gen_sum_lst = []
     
     for i in range(ids.shape[0]):
         input_id = np.array([ids[i]])
@@ -50,7 +51,11 @@ def main():
             result = model.generate(input_ids=input_id, attention_mask=attention_id, num_beams=number_beams, return_dict_in_generate=True, max_length=model.config.max_length, output_scores=True, output_attentions=True)
         
         generated_summary = tokenizer.batch_decode(result[0], skip_special_tokens=True) #, clean_up_tokenization_spaces=False)
-        rouge.add_batch(predictions=generated_summary, references=test['summary'][i])
+        
+        # rouge.add_batch(predictions=generated_summary, references=test['summary'][i])
+        rouge.add(prediction=generated_summary[0], reference=test['summary'][i])
+        
+
     score = rouge.compute()
     print('Rouge: ')
     print(score)
