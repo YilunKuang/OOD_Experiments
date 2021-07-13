@@ -51,9 +51,9 @@ def main():
         
         generated_summary = tokenizer.decode(result, skip_special_tokens=True, clean_up_tokenization_spaces=False)
         rouge.add_batch(predictions=generated_summary, references=test['summary'][i])
-     score = rouge.compute()
-     print('Rouge: ')
-     print(score)
+    score = rouge.compute()
+    print('Rouge: ')
+    print(score)
 #         all = []
 #         # print(result.sequences.shape)
         
