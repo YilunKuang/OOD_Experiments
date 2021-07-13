@@ -195,6 +195,14 @@ def main():
     else:
         model_args, data_args, training_args = parser.parse_args_into_dataclasses()
 
+    print('parser config')
+    print('-----------------------------')
+    print(model_args)
+    print(data_args)
+    print(training_args)
+    print('-----------------------------')
+
+
     # Detecting last checkpoint.
     last_checkpoint = None
     if os.path.isdir(training_args.output_dir) and training_args.do_train and not training_args.overwrite_output_dir:
@@ -244,6 +252,15 @@ def main():
     # download the dataset.
     if data_args.dataset_name is not None:
     #     # Downloading and loading a dataset from the hub.
+    
+        print('dataset config')
+        print('-----------------------------')
+        print(data_args.dataset_name)
+        print(data_args.dataset_config_name)
+        print(model_args.cache_dir)
+        print(data_args.data_dir)
+        print('-----------------------------')
+
         datasets = load_dataset(data_args.dataset_name, data_args.dataset_config_name, cache_dir=model_args.cache_dir, data_dir=data_args.data_dir)
     #     if "validation" not in datasets.keys():
     #         datasets["validation"] = load_dataset(
