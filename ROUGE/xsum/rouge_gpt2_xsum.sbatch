@@ -3,7 +3,7 @@
 #SBATCH --nodes=2
 #SBATCH --gres=gpu:1
 #SBATCH --time=23:00:00
-#SBATCH --mem=256G
+#SBATCH --mem=128G
 #SBATCH --job-name=rouge_calc_fine_tune_gpt2
 #SBATCH --mail-user=yk2516@nyu.edu
 #SBATCH --output=/scratch/yk2516/OOD_Text_Generation/GPT2-XSum/slurm_train_%j.out
