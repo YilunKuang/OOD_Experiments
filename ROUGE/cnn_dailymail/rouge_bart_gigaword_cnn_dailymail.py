@@ -12,17 +12,17 @@ def main():
     model = BartForConditionalGeneration.from_pretrained(model_checkpoint, return_dict=True)
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(device)
-    test = load_dataset("wikihow", "all", data_dir="/scratch/yk2516/OOD_Text_Generation/wikihow_manual", split='test', cache_dir='/scratch/yk2516/cache/')
-    # test = load_dataset("gigaword", split='test',cache_dir='/scratch/yk2516/cache/')
-    # test = load_dataset("big_patent", "g", split='test',cache_dir='/scratch/yk2516/cache/')
+    # test = load_dataset("wikihow", "all", data_dir="/scratch/nm3571", split='test')
+    # test = load_dataset("gigaword", split='test')
+    # test = load_dataset("big_patent", "g", split='test')
     # test = load_dataset("xsum",cache_dir='/scratch/yk2516/cache/', split='test')
     # test = load_dataset("cnn_daily",cache_dir='/scratch/yk2516/cache/', split='test[:]')
     # test = load_dataset("cnn_dailymail", name='3.0.0',download_mode="force_redownload",split='test', cache_dir='/scratch/yk2516/cache/')
-    # test = load_dataset(path="cnn_dailymail",name='3.0.0',split='test',cache_dir='/scratch/yk2516/cache/')
+    test = load_dataset("cnn_dailymail",'3.0.0',split='test',cache_dir='/scratch/yk2516/cache/')
     
     print(test)
     print(model.config.max_length)
-    encodings =  tokenizer(test['text'], return_tensors='pt', padding=True, truncation=True, max_length=1024).to(device)
+    encodings =  tokenizer(test['article'], return_tensors='pt', padding=True, truncation=True, max_length=1024).to(device)
     
     model = model.to(device)
     model.eval()
@@ -53,7 +53,7 @@ def main():
         generated_summary = tokenizer.batch_decode(result[0], skip_special_tokens=True) #, clean_up_tokenization_spaces=False)
         
         # rouge.add_batch(predictions=generated_summary, references=test['summary'][i])
-        rouge.add(prediction=generated_summary[0], reference=test['headline'][i])
+        rouge.add(prediction=generated_summary[0], reference=test['highlights'][i])
         
 
     score = rouge.compute()
