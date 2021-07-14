@@ -4,7 +4,7 @@
 #SBATCH --gres=gpu:1
 #SBATCH --time=23:00:00
 #SBATCH --mem=128G
-#SBATCH --job-name=ppl_calc
+#SBATCH --job-name=rouge_calc
 #SBATCH --mail-user=yk2516@nyu.edu
 #SBATCH --output=/scratch/yk2516/OOD_Text_Generation/BART-Gigaword/slurm_train_%j.out
 
