@@ -26,6 +26,9 @@ import sys
 from dataclasses import dataclass, field
 from typing import Optional
 
+import nltk
+import numpy as np
+import datasets
 from datasets import load_dataset, load_metric
 
 import transformers
@@ -457,14 +460,15 @@ def main():
     if data_args.max_eval_samples is not None:
         eval_dataset = eval_dataset.select(range(data_args.max_eval_samples))
 
+    rouge = load_metric("rouge")
+    
     def compute_metrics(eval_pred):
         """Computes the rouge score (R1/R2/RL) from a 
            transformers.trainer_utils.EvalPrediction object.
         """
-        from datasets import load_metric
         labels = eval_pred.label_ids
         preds = eval_pred.predictions #.argmax(-1)
-        rouge = load_metric('rouge')
+        
         score_dict = rouge.compute(predictions=preds, references=labels)
         
         return score_dict
@@ -477,7 +481,7 @@ def main():
         tokenizer=tokenizer,
         compute_metrics = compute_metrics,
         # Data collator will default to DataCollatorWithPadding, so we change it.
-        data_collator=default_data_collator,
+        data_collator=default_data_collator
     )
 
     # # Training
@@ -503,9 +507,13 @@ def main():
 
     # Evaluation
     # if training_args.do_eval:
+    
+    result = {}
     logger.info("*** Evaluate ***")
-
-    metrics = trainer.evaluate()
+    metrics = trainer.evaluate(max_length=data_args.max_target_length,num_beams=data_args.num_beams,metric_key_prefix="eval")
+    max_eval_samples = data_args.max_eval_samples if data_args.max_eval_samples is not None else len(eval_dataset)
+    metrics["eval_samples"] = min(max_eval_samples,len(eval_dataset))
+    
 
     # max_eval_samples = data_args.max_eval_samples if data_args.max_eval_samples is not None else len(eval_dataset)
     # metrics["eval_samples"] = min(max_eval_samples, len(eval_dataset))
