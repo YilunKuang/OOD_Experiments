@@ -510,7 +510,7 @@ def main():
     
     result = {}
     logger.info("*** Evaluate ***")
-    metrics = trainer.evaluate(max_length=data_args.max_target_length,num_beams=data_args.num_beams,metric_key_prefix="eval")
+    metrics = trainer.evaluate()
     max_eval_samples = data_args.max_eval_samples if data_args.max_eval_samples is not None else len(eval_dataset)
     metrics["eval_samples"] = min(max_eval_samples,len(eval_dataset))
     
