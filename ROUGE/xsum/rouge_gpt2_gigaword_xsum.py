@@ -486,12 +486,6 @@ def main():
             print(preds.shape)
             print(labels.shape)
             print('succeed with shape')
-        except:
-            print(preds.size())
-            print(labels.size())
-            print('succeed with size()')
-        except:
-            print('can not print anything about the labels size')
             
         try:
             print(preds[0])
