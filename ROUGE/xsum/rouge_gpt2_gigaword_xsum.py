@@ -502,10 +502,10 @@ def main():
         
         try:
             for i in range(10):
-                if i = 0 or 1:
+                if i == 0 or 1:
                     print('trying to add to rouge metric')
                 rouge.add(preds[i],labels[i])
-                if i = 0 or 1:
+                if i == 0 or 1:
                     print('adding succeed')
             score_dict = rouge.compute()
             print('compute finished with 10 examples!')
