@@ -466,12 +466,66 @@ def main():
         """Computes the rouge score (R1/R2/RL) from a 
            transformers.trainer_utils.EvalPrediction object.
         """
-        labels = eval_pred.label_ids
-        preds = eval_pred.predictions #.argmax(-1)
+        try:
+            labels = eval_pred.label_ids
+            preds = eval_pred.predictions #.argmax(-1)
+            print('succeed without argmax')
+        except:
+            labels = eval_pred.label_ids
+            preds = eval_pred.predictions.argmax(-1)
+            print('succeed with argmax')
+            
+        print('see what labels and preds look like')
         
-        score_dict = rouge.compute(predictions=preds, references=labels)
+        try:
+            print(len(labels))
+            print(len(preds))
+            length_preds = len(preds)
+            print('succeed with len')
+        except:
+            print(preds.shape)
+            print(labels.shape)
+            print('succeed with shape')
+        except:
+            print(preds.size())
+            print(labels.size())
+            print('succeed with size()')
+        except:
+            print('can not print anything about the labels size')
+            
+        try:
+            print(preds[0])
+            print(labels[0])
+            print('succeed in printing preds and labels 0')
+        except:
+            print('can not print label and preds')
         
-        return score_dict
+        try:
+            for i in range(10):
+                if i = 0 or 1:
+                    print('trying to add to rouge metric')
+                rouge.add(preds[i],labels[i])
+                if i = 0 or 1:
+                    print('adding succeed')
+            score_dict = rouge.compute()
+            print('compute finished with 10 examples!')
+            return score_dict
+        except:
+            print('10 examples does not work out either')
+            
+            # print('maybe length_preds is not available')
+            #for i in range(10):
+             #   if i = 0 or 1:
+              #      print('trying to add to rouge metric')
+               # rouge.add(preds[i],labels[i])
+                #if i = 0 or 1:
+                 #   print('adding succeed')
+            #score_dict = rouge.compute()
+        
+            
+        # score_dict = rouge.compute(predictions=preds, references=labels)
+            score_dict = {}
+            return score_dict
 
     # Initialize our Trainer
     trainer = Trainer(
