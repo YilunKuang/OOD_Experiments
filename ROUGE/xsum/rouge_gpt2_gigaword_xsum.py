@@ -31,7 +31,7 @@ tokenizer.add_special_tokens({'pad_token': '[PAD]'})
 rouge = load_metric('rouge')
 model = model.to(device)
 
-for i in range(ids.shape[0]):
+for i in range(len(test['document'])):
     # input_id = np.array([ids[i]])
     # input_id = torch.from_numpy(input_id).to(device)
     # attention_id = np.array([attention_ids[i]])
