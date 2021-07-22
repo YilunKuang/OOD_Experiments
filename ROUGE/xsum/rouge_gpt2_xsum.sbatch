@@ -80,13 +80,13 @@
 ## Testing fine-tuned gpt2 on XSum test set
 # -------------------------------------------------------------------------#
 
-singularity exec --nv --overlay $SCRATCH/overlay-50G-10M.ext3:ro /scratch/work/public/singularity/cuda10.1-cudnn7-devel-ubuntu18.04-20201207.sif /bin/bash -c '
+# singularity exec --nv --overlay $SCRATCH/overlay-50G-10M.ext3:ro /scratch/work/public/singularity/cuda10.1-cudnn7-devel-ubuntu18.04-20201207.sif /bin/bash -c '
 
-echo "Running - calculate rouge score for finetuned gpt2 on XSum"
-source /ext3/env.sh
-conda activate
+# echo "Running - calculate rouge score for finetuned gpt2 on XSum"
+# source /ext3/env.sh
+# conda activate
 
-python -u rouge_gpt2_gigaword_xsum.py --model_name_or_path /scratch/yk2516/OOD_Text_Generation/checkpoint-36000 --dataset_name xsum --eval_accumulation_steps 20 --output_dir /scratch/yk2516/OOD_Text_Generation/GPT2-XSum --per_device_eval_batch_size=1 --cache_dir /scratch/yk2516/cache'
+# python -u rouge_gpt2_gigaword_xsum.py --model_name_or_path /scratch/yk2516/OOD_Text_Generation/checkpoint-36000 --dataset_name xsum --eval_accumulation_steps 20 --output_dir /scratch/yk2516/OOD_Text_Generation/GPT2-XSum --per_device_eval_batch_size=1 --cache_dir /scratch/yk2516/cache'
 
 # -------------------------------------------------------------------------#
 # Testing vanilla gpt2 on XSum test set - change to 85 examples
@@ -123,3 +123,10 @@ python -u rouge_gpt2_gigaword_xsum.py --model_name_or_path /scratch/yk2516/OOD_T
 # conda activate
 
 # python -u run_clm.py --model_name_or_path gpt2 --dataset_name cnn_dailymail --dataset_config_name 3.0.0 --do_predict --eval_accumulation_steps 20 --output_dir /scratch/yk2516/OOD_Text_Generation/GPT2-CNN --per_device_eval_batch_size=1 --cache_dir /scratch/yk2516/cache'
+
+singularity exec --nv --overlay $SCRATCH/overlay-50G-10M.ext3:ro /scratch/work/public/singularity/cuda10.1-cudnn7-devel-ubuntu18.04-20201207.sif /bin/bash -c '
+echo "Running - evaluating fine-tuned GPT2 (Gigaword) on XSum (Rouge)"
+source /ext3/env.sh
+conda activate
+python -u rouge_gpt2_gigaword_xsum.py'
+
