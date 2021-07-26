@@ -22,6 +22,7 @@ python run_summarization.py \
     --do_eval \
     --dataset_name wikihow \
     --dataset_config all \
+    --data_dir /scratch/yk2516/OOD_Text_Generation/wikihow_manual
     --source_prefix "summarize: " \
     --output_dir /scratch/yk2516/OOD_Text_Generation/BART-Wikihow \
     --per_device_train_batch_size=2 \
