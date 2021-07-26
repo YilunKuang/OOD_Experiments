@@ -4,9 +4,9 @@
 #SBATCH --gres=gpu:1
 #SBATCH --time=23:00:00
 #SBATCH --mem=128G
-#SBATCH --job-name=fine_tune_bart_on_gigaword
+#SBATCH --job-name=fine_tune_bart_on_wikihow
 #SBATCH --mail-user=yk2516@nyu.edu
-#SBATCH --output=slurm_bart_on_gigaword_%j.out
+#SBATCH --output=slurm_bart_on_wikihow_%j.out
 
 ## fine-tune vanilla bart on gigaword
 
