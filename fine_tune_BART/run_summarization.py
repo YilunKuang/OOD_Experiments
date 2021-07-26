@@ -17,6 +17,13 @@
 Fine-tuning the library models for sequence to sequence.
 """
 # You can also adapt this script on your own sequence to sequence task. Pointers for this are left as comments.
+"""
+Modification of this file:
+Author: Yilun Kuang
+Purpose: OOD Detection for Text Generation
+Description: I changed the load_data by adding the data_dir argument. The rest of the code is the same as the huggingface released version.
+Date: Jul 26, 2021
+"""
 
 import logging
 import os
