@@ -13,7 +13,7 @@ import torch as torch
 from tqdm import tqdm
 import numpy as np
 
-model_checkpoint = 'gpt2'
+model_checkpoint = '/scratch/yk2516/OOD_Text_Generation/checkpoint-36000'
 tokenizer = GPT2Tokenizer.from_pretrained(model_checkpoint)
 model = GPT2LMHeadModel.from_pretrained(model_checkpoint, pad_token_id=tokenizer.eos_token_id, return_dict=True)
 device = "cuda" if torch.cuda.is_available() else "cpu"
