@@ -18,7 +18,7 @@ tokenizer = GPT2Tokenizer.from_pretrained(model_checkpoint)
 model = GPT2LMHeadModel.from_pretrained(model_checkpoint, pad_token_id=tokenizer.eos_token_id, return_dict=True)
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-test = load_dataset("xsum", split='test',cache_dir='/scratch/yk2516/cache')
+test = load_dataset("xsum", split='test',download_mode="force_redownload",cache_dir='/scratch/yk2516/cache')
 
 print(device)
 print(test)
