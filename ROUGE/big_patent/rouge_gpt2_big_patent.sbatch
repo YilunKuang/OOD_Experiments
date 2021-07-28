@@ -9,6 +9,10 @@
 #SBATCH --output=/scratch/yk2516/OOD_Text_Generation/GPT2-Big-Patent/slurm_train_%j.out
 
 
+# Changes need to be make:
+# 1. node, output dir
+# 2. echo, python file name
+
 singularity exec --nv --overlay $SCRATCH/overlay-50G-10M.ext3:ro /scratch/work/public/singularity/cuda10.1-cudnn7-devel-ubuntu18.04-20201207.sif /bin/bash -c '
 echo "Running - evaluating fine-tuned GPT2 (Gigaword) on Big Patent (Rouge)"
 source /ext3/env.sh
