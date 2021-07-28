@@ -5,6 +5,11 @@ import torch as torch
 from tqdm import tqdm
 import numpy as np
 
+# changes:
+# 1. model_checkpoint
+# 2. load_dataset
+# 3. encodings, rouge.add
+
 model_checkpoint = '/scratch/yk2516/OOD_Text_Generation/checkpoint-36000'
 tokenizer = GPT2Tokenizer.from_pretrained(model_checkpoint)
 model = GPT2LMHeadModel.from_pretrained(model_checkpoint, pad_token_id=tokenizer.eos_token_id, return_dict=True)
