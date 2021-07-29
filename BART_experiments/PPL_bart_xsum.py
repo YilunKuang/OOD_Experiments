@@ -64,8 +64,8 @@ def main():
     log_sent = []
     num_words = []
     print("number of samples:", ids.shape[0])
-    # for i in range(ids.shape[0]):
-    for i in range(30):
+    
+    for i in range(ids.shape[0]):
         input_id = np.array([ids[i]])
         input_id = torch.from_numpy(input_id).to(device)
         attention_id = np.array([attention_ids[i]])
