@@ -14,7 +14,7 @@ model_checkpoint = '/scratch/yk2516/OOD_Text_Generation/checkpoint-36000'
 tokenizer = GPT2Tokenizer.from_pretrained(model_checkpoint)
 model = GPT2LMHeadModel.from_pretrained(model_checkpoint, pad_token_id=tokenizer.eos_token_id, return_dict=True)
 device = "cuda" if torch.cuda.is_available() else "cpu"
-
+rouge = load_metric('rouge', cache_dir='/scratch/yk2516/OOD_Text_Generation/GPT2-Big-Patent')
 test = load_dataset("big_patent", "g", split='test',cache_dir='/scratch/yk2516/cache/')
 
 print(device)
@@ -33,8 +33,6 @@ print("Input ids size", encodings['input_ids'].shape)
 ids = encodings['input_ids'].cpu().detach().numpy()
 attention_ids = encodings['attention_mask'].cpu().detach().numpy()
 print("number of samples:", ids.shape[0])
-
-rouge = load_metric('rouge')
 
 for i in range(ids.shape[0]):
     print(i)
