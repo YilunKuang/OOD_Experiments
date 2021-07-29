@@ -23,6 +23,9 @@ python run_summarization.py \
     --dataset_name wikihow \
     --dataset_config all \
     --output_dir /scratch/yk2516/OOD_Text_Generation/BART-Wikihow \
+    --predict_with_generate \
+    --save_total_limit 2 \
+    --num_train_epochs 1 \
     --per_device_train_batch_size=2 \
     --per_device_eval_batch_size=2 \
     --cache_dir /scratch/yk2516/cache'
