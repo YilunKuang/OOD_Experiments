@@ -7,7 +7,7 @@ import numpy as np
 import argparse
 
 # Example command line input
-# python perplexity_batched_gigaword_bart_cnn.py --dataset_name xsum --model_name_or_path /scratch/yk2516/OOD_Text_Generation/BART-Wikihow/checkpoint-final
+# python PPL_bart_xsum.py --dataset_name xsum --model_name_or_path /scratch/yk2516/OOD_Text_Generation/BART-Wikihow/checkpoint-final
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--dataset_name", help="choose a dataset from wikihow, gigaword, big_patent, xsum, cnn_dailymail, billsum",
@@ -64,7 +64,8 @@ def main():
     log_sent = []
     num_words = []
     print("number of samples:", ids.shape[0])
-    for i in range(ids.shape[0]):
+    # for i in range(ids.shape[0]):
+    for i in range(30):
         input_id = np.array([ids[i]])
         input_id = torch.from_numpy(input_id).to(device)
         attention_id = np.array([attention_ids[i]])
