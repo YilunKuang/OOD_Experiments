@@ -5,6 +5,7 @@ from tqdm import tqdm
 from datasets import load_metric
 import numpy as np
 import argparse
+import pickle
 
 # Example command line input
 # python PPL_bart_xsum.py --dataset_name xsum --model_name_or_path /scratch/yk2516/OOD_Text_Generation/BART-Wikihow/checkpoint-final
@@ -67,6 +68,7 @@ def main():
     attention_ids = encodings['attention_mask'].cpu().detach().numpy()
     log_sent = []
     num_words = []
+    summary_ppl = []
     print("number of samples:", ids.shape[0])
     
     if args.test_case:
@@ -91,12 +93,17 @@ def main():
                 max_score = torch.max(torch.stack([torch.max(result.scores[-1][batch_num+beam_num]), max_score]))
             log_sent.append(max_score)
             num_words.append(result.sequences.shape[1])
-    
+            summary_ppl.append(torch.exp(-1*max_score/result.sequences.shape[1]))
+
     print(log_sent)
-    print(torch.stack(log_sent).sum())
+    print("sum of lls:", torch.stack(log_sent).sum())
     total_words = sum(num_words)
-    print(total_words)
-    print("Perplexity: ", torch.exp((-1*(torch.stack(log_sent).sum()))/total_words))
+    print("total words:", total_words)
+
+    with open('/scratch/yk2516/OOD_Text_Generation/BART-Gigaword/ppl_result/summary_ppl_' + args.dataset_name + '.pkl', 'wb') as f:
+        pickle.dump(summary_ppl, f)
+    print("saved summary ppls")
+    print("Perplexity of corpus: ", torch.exp((-1*(torch.stack(log_sent).sum()))/total_words))
 
 if __name__ == "__main__":
     main()
