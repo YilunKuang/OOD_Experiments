@@ -16,7 +16,7 @@ parser.add_argument("--model_name_or_path", help="choose a model_checkpoint from
                                                                                         facebook/bart-large, \
                                                                                         or /scratch/yk2516/OOD_Text_Generation/BART-Wikihow/checkpoint-final",
                     type=str)
-parser.add_argument('--test_case', help="action=store_true; if used, then we only iterate over the first 20 examples without \
+parser.add_argument('--test_case', help="if called, then we only iterate over the first 20 examples without \
                                          going through the whole test set. This is for debugging only.", action='store_true')
 
 args = parser.parse_args()
