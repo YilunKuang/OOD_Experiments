@@ -33,7 +33,7 @@ ids = encodings['input_ids'].cpu().detach().numpy()
 attention_ids = encodings['attention_mask'].cpu().detach().numpy()
 print("number of samples:", ids.shape[0])
 
-rouge = load_metric('rouge')
+rouge = load_metric('rouge', cache_dir='/scratch/yk2516/cache_rouge_supplementary/')
 
 for i in range(ids.shape[0]):
     input_id = np.array([ids[i]])
