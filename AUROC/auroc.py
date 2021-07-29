@@ -3,7 +3,7 @@ import numpy as np
 import pickle
 
 def compute_auroc(id_pps, ood_pps, normalize=False, return_curve=False):
-    y = np.concatenate((np.ones_like(ood_pps.cpu()), np.zeros_like(id_pps.cpu())))
+    y = np.concatenate((np.ones_like(ood_pps.detach().cpu()), np.zeros_like(id_pps.detach().cpu())))
     scores = np.concatenate((ood_pps, id_pps))
     if normalize:
         scores = (scores - scores.min()) / (scores.max() - scores.min())
