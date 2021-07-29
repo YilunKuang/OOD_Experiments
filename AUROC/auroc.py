@@ -29,10 +29,10 @@ with open(ood_file_name, 'rb') as g:
 # print(ood_ppls)
 
 # Uncomment below if you stored tensors in the above file (which is the case for BART).
-# for idx, tens in enumerate(iid_ppls):
-#    iid_ppls[idx] = tens.cpu().detach().item()
-# for idx, tens in enumerate(ood_ppls):
-#    ood_ppls[idx] = tens.cpu().detach().item()
+for idx, tens in enumerate(iid_ppls):
+   iid_ppls[idx] = tens.cpu().detach().item()
+for idx, tens in enumerate(ood_ppls):
+   ood_ppls[idx] = tens.cpu().detach().item()
 
 # print("after", iid_ppls)
 result = compute_auroc(iid_ppls, ood_ppls)
