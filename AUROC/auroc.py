@@ -12,29 +12,40 @@ def compute_auroc(id_pps, ood_pps, normalize=False, return_curve=False):
     else:
         return roc_auc_score(y, scores)
 
-iid_dataset_name = 'wikihow'
-# iid_file_name = '/home/nm3571/summarization/results/fine_tuned_gpt2/summary_ppl_' + iid_dataset_name + '.pkl'
-iid_file_name = '/scratch/yk2516/OOD_Text_Generation/BART-Billsum/ppl_result/summary_ppl_billsum.pkl'
-ood_dataset_name = 'cnn_dailymail'
-# ood_file_name = '/home/nm3571/summarization/results/fine_tuned_gpt2/summary_ppl_' + ood_dataset_name + '.pkl'
-ood_file_name = '/scratch/yk2516/OOD_Text_Generation/BART-Gigaword/ppl_result/summary_ppl_xsum.pkl'
+def main():
+    dataset_lst = ['wikihow', 'gigaword', 'big_patent', 'xsum', 'cnn_dailymail', 'billsum']
+    dataset_dir = ['Wikihow','Gigaword','Big-Patent','XSum','CNN','Billsum']
 
-iid_ppls = []
-ood_ppls = []
-with open(iid_file_name, 'rb') as f:
-    iid_ppls = pickle.load(f)
-with open(ood_file_name, 'rb') as g:
-    ood_ppls = pickle.load(g)
+    for i in range(len(dataset_lst)):
+        iid_dataset_name = 'wikihow'
+        ind_iid_dataset_dir = dataset_lst.index(iid_dataset_name)
+        iid_file_name = '/scratch/yk2516/OOD_Text_Generation/BART-'+dataset_dir[ind_iid_dataset_dir]+'/ppl_result/summary_ppl_'+ iid_dataset_name +'.pkl'
 
-# print(ood_ppls)
+        ood_dataset_name = dataset_lst[i]
+        ind_ood_dataset_dir = dataset_lst.index(ood_dataset_name)
+        # ood_file_name = '/home/nm3571/summarization/results/fine_tuned_gpt2/summary_ppl_' + ood_dataset_name + '.pkl'
+        ood_file_name = '/scratch/yk2516/OOD_Text_Generation/BART-'+dataset_dir[ind_ood_dataset_dir]+'/ppl_result/summary_ppl_'+ood_dataset_name+'.pkl'
 
-# Uncomment below if you stored tensors in the above file (which is the case for BART).
-for idx, tens in enumerate(iid_ppls):
-   iid_ppls[idx] = tens.cpu().detach().item()
-for idx, tens in enumerate(ood_ppls):
-   ood_ppls[idx] = tens.cpu().detach().item()
+        iid_ppls = []
+        ood_ppls = []
+        with open(iid_file_name, 'rb') as f:
+            iid_ppls = pickle.load(f)
+        with open(ood_file_name, 'rb') as g:
+            ood_ppls = pickle.load(g)
 
-# print("after", iid_ppls)
-result = compute_auroc(iid_ppls, ood_ppls)
-print("AUROC for " + iid_dataset_name + " vs " + ood_dataset_name)
-print(result)
+        # print(ood_ppls)
+
+        # Uncomment below if you stored tensors in the above file (which is the case for BART).
+        for idx, tens in enumerate(iid_ppls):
+           iid_ppls[idx] = tens.cpu().detach().item()
+        for idx, tens in enumerate(ood_ppls):
+           ood_ppls[idx] = tens.cpu().detach().item()
+
+        # print("after", iid_ppls)
+        result = compute_auroc(iid_ppls, ood_ppls)
+        print("AUROC for " + iid_dataset_name + " vs " + ood_dataset_name)
+        print(result)
+
+if __name__ == "__main__":
+    main()
+    
