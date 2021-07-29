@@ -8,7 +8,7 @@ import argparse
 import pickle
 
 # Example command line input
-# python PPL_bart_xsum.py --dataset_name xsum --model_name_or_path /scratch/yk2516/OOD_Text_Generation/BART-Wikihow/checkpoint-final
+# python PPL_bart.py --dataset_name xsum --model_name_or_path /scratch/yk2516/OOD_Text_Generation/BART-Wikihow/checkpoint-final
 # (optional) --test_case
 
 parser = argparse.ArgumentParser()
@@ -24,6 +24,7 @@ parser.add_argument('--test_case', help="if called, then we only iterate over th
 args = parser.parse_args()
 dataset_lst = ['wikihow', 'gigaword', 'big_patent', 'xsum', 'cnn_dailymail', 'billsum']
 model_checkpoint_lst = ['a1noack/bart-large-gigaword', 'facebook/bart-large', '/scratch/yk2516/OOD_Text_Generation/BART-Wikihow/checkpoint-final']
+dataset_dir = ['Wikihow','Gigaword','Big-Patent','XSum','CNN','Billsum']
 
 def main():
     if args.model_name_or_path not in model_checkpoint_lst:
@@ -33,7 +34,9 @@ def main():
     tokenizer = BartTokenizerFast.from_pretrained(model_checkpoint)
     model = BartForConditionalGeneration.from_pretrained(model_checkpoint, return_dict=True)
     device = "cuda" if torch.cuda.is_available() else "cpu"
+    ind_dataset_dir = dataset_lst.index(args.dataset_name)
     print(device)
+    
     if args.dataset_name == 'wikihow':
         test = load_dataset("wikihow", "all", data_dir="/scratch/yk2516/OOD_Text_Generation/wikihow_manual", split='test', cache_dir='/scratch/yk2516/cache/')
         input_column = 'text'
@@ -99,8 +102,7 @@ def main():
     print("sum of lls:", torch.stack(log_sent).sum())
     total_words = sum(num_words)
     print("total words:", total_words)
-
-    with open('/scratch/yk2516/OOD_Text_Generation/BART-Gigaword/ppl_result/summary_ppl_' + args.dataset_name + '.pkl', 'wb') as f:
+    with open('/scratch/yk2516/OOD_Text_Generation/BART-' + dataset_dir[ind_dataset_dir] + '/ppl_result/summary_ppl_' + args.dataset_name + '.pkl', 'wb') as f:
         pickle.dump(summary_ppl, f)
     print("saved summary ppls")
     print("Perplexity of corpus: ", torch.exp((-1*(torch.stack(log_sent).sum()))/total_words))
