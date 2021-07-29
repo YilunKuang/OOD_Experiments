@@ -24,6 +24,7 @@ parser.add_argument('--test_case', help="if called, then we only iterate over th
 args = parser.parse_args()
 dataset_lst = ['wikihow', 'gigaword', 'big_patent', 'xsum', 'cnn_dailymail', 'billsum']
 model_checkpoint_lst = ['a1noack/bart-large-gigaword', 'facebook/bart-large', '/scratch/yk2516/OOD_Text_Generation/BART-Wikihow/checkpoint-final']
+dataset_dir = ['Wikihow','Gigaword','Big-Patent','XSum','CNN','Billsum']
 
 def main():
     if args.model_name_or_path not in model_checkpoint_lst:
