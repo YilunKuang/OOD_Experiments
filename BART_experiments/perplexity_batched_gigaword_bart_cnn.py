@@ -7,16 +7,18 @@ import numpy as np
 import argparse
 
 # Example command line input
-# python perplexity_batched_gigaword_bart_cnn.py --dataset_name xsum --model_name_or_path a1noack/bart-large-gigaword
+# python perplexity_batched_gigaword_bart_cnn.py --dataset_name xsum --model_name_or_path /scratch/yk2516/OOD_Text_Generation/BART-Wikihow/checkpoint-final
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--dataset_name", help="choose a dataset from wikihow, gigaword, big_patent, xsum, cnn_dailymail, billsum",
                     type=str)
-parser.add_argument("--model_name_or_path", help="choose a model_checkpoint from either a1noack/bart-large-gigaword or facebook/bart-large",
+parser.add_argument("--model_name_or_path", help="choose a model_checkpoint from either a1noack/bart-large-gigaword, \
+                                                                                        facebook/bart-large, \
+                                                                                        or /scratch/yk2516/OOD_Text_Generation/BART-Wikihow/checkpoint-final",
                     type=str)
 args = parser.parse_args()
 dataset_lst = ['wikihow', 'gigaword', 'big_patent', 'xsum', 'cnn_dailymail', 'billsum']
-model_checkpoint_lst = ['a1noack/bart-large-gigaword', 'facebook/bart-large']
+model_checkpoint_lst = ['a1noack/bart-large-gigaword', 'facebook/bart-large', '/scratch/yk2516/OOD_Text_Generation/BART-Wikihow/checkpoint-final']
 
 def main():
     if args.model_name_or_path not in model_checkpoint_lst:
@@ -56,11 +58,6 @@ def main():
     model = model.to(device)
     model.eval()
     number_beams = 8
-    # print(encodings['input_ids'])
-    # print(encodings['input_ids'].cpu().detach().numpy())
-    # print(torch.from_numpy(encodings['input_ids'].cpu().detach().numpy()).to(device))
-    # print(type(encodings['input_ids'][0].item()))
-    # print("Wikihow vocab size: ", result.scores[0].shape[1])
     print("Input ids size", encodings['input_ids'].shape)
     ids = encodings['input_ids'].cpu().detach().numpy()
     attention_ids = encodings['attention_mask'].cpu().detach().numpy()
@@ -76,11 +73,8 @@ def main():
             result = model.generate(input_ids=input_id, attention_mask=attention_id, num_beams=number_beams, return_dict_in_generate=True, max_length=model.config.max_length, output_scores=True, output_attentions=True)
         
         all = []
-        # print(result.sequences.shape)
         
         for batch_num in range(0, result.scores[0].shape[0], number_beams):
-            # lls = torch.tensor(0, dtype=torch.float)
-            # print(batch_num)
             max_score = torch.tensor(-1*1e6, dtype=torch.float).to(device)
             for beam_num in range(number_beams):
                 # print([torch.max(result.scores[-1][batch_num+beam_num]), max_score])
