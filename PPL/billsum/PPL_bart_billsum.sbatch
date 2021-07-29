@@ -12,4 +12,4 @@ singularity exec --nv --overlay $SCRATCH/overlay-50G-10M.ext3:ro /scratch/work/p
 echo "Running - evaluating fine tuned BART (on Wikihow) on Billsum"
 source /ext3/env.sh
 conda activate
-python -u PPL_bart_billsum --dataset_name billsum --model_name_or_path /scratch/yk2516/OOD_Text_Generation/BART-Wikihow/checkpoint-final'
+python -u PPL_bart_billsum.py --dataset_name billsum --model_name_or_path /scratch/yk2516/OOD_Text_Generation/BART-Wikihow/checkpoint-final'
