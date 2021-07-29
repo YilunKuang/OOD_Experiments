@@ -4,7 +4,13 @@ import torch as torch
 from tqdm import tqdm
 from datasets import load_metric
 import numpy as np
+import argparse
 
+parser = argparse.ArgumentParser()
+parser.add_argument("dataset_name", help="choose a dataset from wikihow, gigaword, big_patent, xsum, cnn_dailymail, billsum",
+                    type=str)
+args = parser.parse_args()
+dataset_lst = ['wikihow', 'gigaword', 'big_patent', 'xsum', 'cnn_dailymail', 'billsum']
 
 def main():
     model_checkpoint = 'a1noack/bart-large-gigaword' #'facebook/bart-large' #'a1noack/bart-large-gigaword' #'facebook/bart-base'  #'facebook/bart-large-cnn'
@@ -12,17 +18,26 @@ def main():
     model = BartForConditionalGeneration.from_pretrained(model_checkpoint, return_dict=True)
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(device)
-    # test = load_dataset("wikihow", "all", data_dir="/scratch/nm3571", split='test')
-    # test = load_dataset("gigaword", split='test')
-    # test = load_dataset("big_patent", "g", split='test')
-    # test = load_dataset("xsum",cache_dir='/scratch/yk2516/cache/', split='test[:]')
-    # test = load_dataset("cnn_daily",cache_dir='/scratch/yk2516/cache/', split='test[:]')
-    # test = load_dataset("cnn_dailymail", name='3.0.0',download_mode="force_redownload",split='test', cache_dir='/scratch/yk2516/cache/')
-    test = load_dataset(path="cnn_dailymail",name='3.0.0',split='test',cache_dir='/scratch/yk2516/cache/')
+    if args.dataset_name == 'wikihow':
+        test = load_dataset("wikihow", "all", data_dir="/scratch/yk2516/OOD_Text_Generation/wikihow_manual", split='test', cache_dir='/scratch/yk2516/cache/')
+        input_column = 'text'
+        summary_column = 'headline'
+    if args.dataset_name == 'gigaword':
+        test = load_dataset('gigaword', split='test',cache_dir='/scratch/yk2516/cache/')
+    if args.dataset_name == 'big_patent':
+        test = load_dataset('big_patent', "g", split='test',cache_dir='/scratch/yk2516/cache/')
+    if args.dataset_name == 'xsum':
+        test = load_dataset("xsum",cache_dir='/scratch/yk2516/cache/', split='test')
+    if args.dataset_name == 'cnn_dailymail':
+        test = load_dataset(path="cnn_dailymail",name='3.0.0',split='test',cache_dir='/scratch/yk2516/cache/')
+    if args.dataset_name == 'billsum':
+        test = load_dataset("billsum", split='test',cache_dir='/scratch/yk2516/cache/')
+    if args.dataset_name not in dataset_lst:
+        raise ValueError('Please enter a valid dataset name')
     
     print(test)
     print(model.config.max_length)
-    encodings =  tokenizer(test['article'], return_tensors='pt', padding=True, truncation=True, max_length=1024).to(device)
+    encodings =  tokenizer(test[input_column], return_tensors='pt', padding=True, truncation=True, max_length=1024).to(device)
 
     model = model.to(device)
     model.eval()
