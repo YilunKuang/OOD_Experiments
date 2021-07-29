@@ -1,0 +1,286 @@
+Running - fine tune BART on gigaword
+07/04/2021 01:32:15 - WARNING - __main__ - Process rank: -1, device: cuda:0, n_gpu: 1distributed training: False, 16-bits training: False
+07/04/2021 01:32:15 - INFO - __main__ - Training/evaluation parameters Seq2SeqTrainingArguments(
+_n_gpu=1,
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_pin_memory=True,
+ddp_find_unused_parameters=None,
+debug=[],
+deepspeed=None,
+disable_tqdm=False,
+do_eval=True,
+do_predict=False,
+do_train=True,
+eval_accumulation_steps=None,
+eval_steps=500,
+evaluation_strategy=IntervalStrategy.NO,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+gradient_accumulation_steps=1,
+greater_is_better=None,
+group_by_length=False,
+ignore_data_skip=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=5e-05,
+length_column_name=length,
+load_best_model_at_end=False,
+local_rank=-1,
+log_level=-1,
+log_level_replica=-1,
+log_on_each_node=True,
+logging_dir=/scratch/yk2516/OOD_Text_Generation/BART-Gigaword/runs/Jul04_01-32-15_gr034.nyu.cluster,
+logging_first_step=False,
+logging_steps=500,
+logging_strategy=IntervalStrategy.STEPS,
+lr_scheduler_type=SchedulerType.LINEAR,
+max_grad_norm=1.0,
+max_steps=-1,
+metric_for_best_model=None,
+mp_parameters=,
+no_cuda=False,
+num_train_epochs=3.0,
+output_dir=/scratch/yk2516/OOD_Text_Generation/BART-Gigaword,
+overwrite_output_dir=True,
+past_index=-1,
+per_device_eval_batch_size=4,
+per_device_train_batch_size=4,
+predict_with_generate=True,
+prediction_loss_only=False,
+push_to_hub=False,
+push_to_hub_model_id=BART-Gigaword,
+push_to_hub_organization=None,
+push_to_hub_token=None,
+remove_unused_columns=True,
+report_to=[],
+resume_from_checkpoint=None,
+run_name=/scratch/yk2516/OOD_Text_Generation/BART-Gigaword,
+save_on_each_node=False,
+save_steps=500,
+save_strategy=IntervalStrategy.STEPS,
+save_total_limit=None,
+seed=42,
+sharded_ddp=[],
+skip_memory_metrics=True,
+sortish_sampler=False,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+use_legacy_prediction_loop=False,
+warmup_ratio=0.0,
+warmup_steps=0,
+weight_decay=0.0,
+)
+07/04/2021 01:32:15 - INFO - datasets.load - Checking /home/yk2516/.cache/huggingface/datasets/downloads/eee26bab3c73e41016f199c2b7d511ca803e60669aee8e508b38d2ab3560866d.bfa3aa8ee979655eb16623e3740d853290b986b87b0f449aaf24a1717fc52c33.py for additional imports.
+07/04/2021 01:32:15 - INFO - datasets.utils.filelock - Lock 22613092913408 acquired on /home/yk2516/.cache/huggingface/datasets/downloads/eee26bab3c73e41016f199c2b7d511ca803e60669aee8e508b38d2ab3560866d.bfa3aa8ee979655eb16623e3740d853290b986b87b0f449aaf24a1717fc52c33.py.lock
+07/04/2021 01:32:15 - INFO - datasets.load - Found main folder for dataset https://raw.githubusercontent.com/huggingface/datasets/1.8.0/datasets/gigaword/gigaword.py at /home/yk2516/.cache/huggingface/modules/datasets_modules/datasets/gigaword
+07/04/2021 01:32:15 - INFO - datasets.load - Found specific version folder for dataset https://raw.githubusercontent.com/huggingface/datasets/1.8.0/datasets/gigaword/gigaword.py at /home/yk2516/.cache/huggingface/modules/datasets_modules/datasets/gigaword/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6
+07/04/2021 01:32:15 - INFO - datasets.load - Found script file from https://raw.githubusercontent.com/huggingface/datasets/1.8.0/datasets/gigaword/gigaword.py to /home/yk2516/.cache/huggingface/modules/datasets_modules/datasets/gigaword/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6/gigaword.py
+07/04/2021 01:32:15 - INFO - datasets.load - Found dataset infos file from https://raw.githubusercontent.com/huggingface/datasets/1.8.0/datasets/gigaword/dataset_infos.json to /home/yk2516/.cache/huggingface/modules/datasets_modules/datasets/gigaword/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6/dataset_infos.json
+07/04/2021 01:32:15 - INFO - datasets.load - Found metadata file for dataset https://raw.githubusercontent.com/huggingface/datasets/1.8.0/datasets/gigaword/gigaword.py at /home/yk2516/.cache/huggingface/modules/datasets_modules/datasets/gigaword/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6/gigaword.json
+07/04/2021 01:32:16 - INFO - datasets.utils.filelock - Lock 22613092913408 released on /home/yk2516/.cache/huggingface/datasets/downloads/eee26bab3c73e41016f199c2b7d511ca803e60669aee8e508b38d2ab3560866d.bfa3aa8ee979655eb16623e3740d853290b986b87b0f449aaf24a1717fc52c33.py.lock
+07/04/2021 01:32:17 - WARNING - datasets.builder - Using custom data configuration default
+07/04/2021 01:32:17 - INFO - datasets.info - Loading Dataset Infos from /home/yk2516/.cache/huggingface/modules/datasets_modules/datasets/gigaword/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6
+07/04/2021 01:32:17 - INFO - datasets.utils.filelock - Lock 22611091873024 acquired on /scratch/yk2516/cache/_scratch_yk2516_cache_gigaword_default_1.2.0_ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6.lock
+07/04/2021 01:32:17 - INFO - datasets.builder - Overwrite dataset info from restored data version.
+07/04/2021 01:32:17 - INFO - datasets.info - Loading Dataset info from /scratch/yk2516/cache/gigaword/default/1.2.0/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6
+07/04/2021 01:32:17 - INFO - datasets.utils.filelock - Lock 22611091873024 released on /scratch/yk2516/cache/_scratch_yk2516_cache_gigaword_default_1.2.0_ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6.lock
+07/04/2021 01:32:17 - INFO - datasets.utils.filelock - Lock 22611091872304 acquired on /scratch/yk2516/cache/_scratch_yk2516_cache_gigaword_default_1.2.0_ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6.lock
+07/04/2021 01:32:17 - WARNING - datasets.builder - Reusing dataset gigaword (/scratch/yk2516/cache/gigaword/default/1.2.0/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6)
+07/04/2021 01:32:17 - INFO - datasets.info - Loading Dataset info from /scratch/yk2516/cache/gigaword/default/1.2.0/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6
+07/04/2021 01:32:17 - INFO - datasets.utils.filelock - Lock 22611091872304 released on /scratch/yk2516/cache/_scratch_yk2516_cache_gigaword_default_1.2.0_ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6.lock
+07/04/2021 01:32:17 - INFO - datasets.builder - Constructing Dataset for split train, validation, test, from /scratch/yk2516/cache/gigaword/default/1.2.0/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6
+  0%|          | 0/3 [00:00<?, ?it/s]100%|██████████| 3/3 [00:00<00:00, 160.49it/s]
+[INFO|file_utils.py:1590] 2021-07-04 01:32:17,204 >> https://huggingface.co/facebook/bart-large/resolve/main/config.json not found in cache or force_download set to True, downloading to /scratch/yk2516/cache/tmpadjr_n61
+Downloading:   0%|          | 0.00/1.60k [00:00<?, ?B/s]Downloading: 100%|██████████| 1.60k/1.60k [00:00<00:00, 3.04MB/s]
+[INFO|file_utils.py:1594] 2021-07-04 01:32:17,245 >> storing https://huggingface.co/facebook/bart-large/resolve/main/config.json in cache at /scratch/yk2516/cache/3f12fb71b844fcb7d591fdd4e55027da90d7b5dd6aa5430ad00ec6d76585f26c.58d5dda9f4e9f44e980adb867b66d9e0cbe3e0c05360cefe3cd86f5db4fff042
+[INFO|file_utils.py:1602] 2021-07-04 01:32:17,246 >> creating metadata file for /scratch/yk2516/cache/3f12fb71b844fcb7d591fdd4e55027da90d7b5dd6aa5430ad00ec6d76585f26c.58d5dda9f4e9f44e980adb867b66d9e0cbe3e0c05360cefe3cd86f5db4fff042
+[INFO|configuration_utils.py:530] 2021-07-04 01:32:17,398 >> loading configuration file https://huggingface.co/facebook/bart-large/resolve/main/config.json from cache at /scratch/yk2516/cache/3f12fb71b844fcb7d591fdd4e55027da90d7b5dd6aa5430ad00ec6d76585f26c.58d5dda9f4e9f44e980adb867b66d9e0cbe3e0c05360cefe3cd86f5db4fff042
+[INFO|configuration_utils.py:566] 2021-07-04 01:32:17,399 >> Model config BartConfig {
+  "activation_dropout": 0.1,
+  "activation_function": "gelu",
+  "add_bias_logits": false,
+  "add_final_layer_norm": false,
+  "architectures": [
+    "BartModel"
+  ],
+  "attention_dropout": 0.1,
+  "bos_token_id": 0,
+  "classif_dropout": 0.1,
+  "classifier_dropout": 0.0,
+  "d_model": 1024,
+  "decoder_attention_heads": 16,
+  "decoder_ffn_dim": 4096,
+  "decoder_layerdrop": 0.0,
+  "decoder_layers": 12,
+  "decoder_start_token_id": 2,
+  "dropout": 0.1,
+  "early_stopping": true,
+  "encoder_attention_heads": 16,
+  "encoder_ffn_dim": 4096,
+  "encoder_layerdrop": 0.0,
+  "encoder_layers": 12,
+  "eos_token_id": 2,
+  "forced_eos_token_id": 2,
+  "gradient_checkpointing": false,
+  "id2label": {
+    "0": "LABEL_0",
+    "1": "LABEL_1",
+    "2": "LABEL_2"
+  },
+  "init_std": 0.02,
+  "is_encoder_decoder": true,
+  "label2id": {
+    "LABEL_0": 0,
+    "LABEL_1": 1,
+    "LABEL_2": 2
+  },
+  "max_position_embeddings": 1024,
+  "model_type": "bart",
+  "no_repeat_ngram_size": 3,
+  "normalize_before": false,
+  "num_beams": 4,
+  "num_hidden_layers": 12,
+  "pad_token_id": 1,
+  "scale_embedding": false,
+  "task_specific_params": {
+    "summarization": {
+      "length_penalty": 1.0,
+      "max_length": 128,
+      "min_length": 12,
+      "num_beams": 4
+    },
+    "summarization_cnn": {
+      "length_penalty": 2.0,
+      "max_length": 142,
+      "min_length": 56,
+      "num_beams": 4
+    },
+    "summarization_xsum": {
+      "length_penalty": 1.0,
+      "max_length": 62,
+      "min_length": 11,
+      "num_beams": 6
+    }
+  },
+  "transformers_version": "4.8.2",
+  "use_cache": true,
+  "vocab_size": 50265
+}
+
+[INFO|file_utils.py:1590] 2021-07-04 01:32:17,438 >> https://huggingface.co/facebook/bart-large/resolve/main/tokenizer_config.json not found in cache or force_download set to True, downloading to /scratch/yk2516/cache/tmpi_2kggf5
+Downloading:   0%|          | 0.00/26.0 [00:00<?, ?B/s]Downloading: 100%|██████████| 26.0/26.0 [00:00<00:00, 52.8kB/s]
+[INFO|file_utils.py:1594] 2021-07-04 01:32:17,483 >> storing https://huggingface.co/facebook/bart-large/resolve/main/tokenizer_config.json in cache at /scratch/yk2516/cache/1abf196c889c24daca2909359ca2090e5fcbfa21a9ea36d763f70adbafb500d7.67d01b18f2079bd75eac0b2f2e7235768c7f26bd728e7a855a1c5acae01a91a8
+[INFO|file_utils.py:1602] 2021-07-04 01:32:17,483 >> creating metadata file for /scratch/yk2516/cache/1abf196c889c24daca2909359ca2090e5fcbfa21a9ea36d763f70adbafb500d7.67d01b18f2079bd75eac0b2f2e7235768c7f26bd728e7a855a1c5acae01a91a8
+[INFO|configuration_utils.py:530] 2021-07-04 01:32:17,526 >> loading configuration file https://huggingface.co/facebook/bart-large/resolve/main/config.json from cache at /scratch/yk2516/cache/3f12fb71b844fcb7d591fdd4e55027da90d7b5dd6aa5430ad00ec6d76585f26c.58d5dda9f4e9f44e980adb867b66d9e0cbe3e0c05360cefe3cd86f5db4fff042
+[INFO|configuration_utils.py:566] 2021-07-04 01:32:17,526 >> Model config BartConfig {
+  "activation_dropout": 0.1,
+  "activation_function": "gelu",
+  "add_bias_logits": false,
+  "add_final_layer_norm": false,
+  "architectures": [
+    "BartModel"
+  ],
+  "attention_dropout": 0.1,
+  "bos_token_id": 0,
+  "classif_dropout": 0.1,
+  "classifier_dropout": 0.0,
+  "d_model": 1024,
+  "decoder_attention_heads": 16,
+  "decoder_ffn_dim": 4096,
+  "decoder_layerdrop": 0.0,
+  "decoder_layers": 12,
+  "decoder_start_token_id": 2,
+  "dropout": 0.1,
+  "early_stopping": true,
+  "encoder_attention_heads": 16,
+  "encoder_ffn_dim": 4096,
+  "encoder_layerdrop": 0.0,
+  "encoder_layers": 12,
+  "eos_token_id": 2,
+  "forced_eos_token_id": 2,
+  "gradient_checkpointing": false,
+  "id2label": {
+    "0": "LABEL_0",
+    "1": "LABEL_1",
+    "2": "LABEL_2"
+  },
+  "init_std": 0.02,
+  "is_encoder_decoder": true,
+  "label2id": {
+    "LABEL_0": 0,
+    "LABEL_1": 1,
+    "LABEL_2": 2
+  },
+  "max_position_embeddings": 1024,
+  "model_type": "bart",
+  "no_repeat_ngram_size": 3,
+  "normalize_before": false,
+  "num_beams": 4,
+  "num_hidden_layers": 12,
+  "pad_token_id": 1,
+  "scale_embedding": false,
+  "task_specific_params": {
+    "summarization": {
+      "length_penalty": 1.0,
+      "max_length": 128,
+      "min_length": 12,
+      "num_beams": 4
+    },
+    "summarization_cnn": {
+      "length_penalty": 2.0,
+      "max_length": 142,
+      "min_length": 56,
+      "num_beams": 4
+    },
+    "summarization_xsum": {
+      "length_penalty": 1.0,
+      "max_length": 62,
+      "min_length": 11,
+      "num_beams": 6
+    }
+  },
+  "transformers_version": "4.8.2",
+  "use_cache": true,
+  "vocab_size": 50265
+}
+
+[INFO|file_utils.py:1590] 2021-07-04 01:32:17,571 >> https://huggingface.co/facebook/bart-large/resolve/main/vocab.json not found in cache or force_download set to True, downloading to /scratch/yk2516/cache/tmpjfnyegzs
+Downloading:   0%|          | 0.00/899k [00:00<?, ?B/s]Downloading: 100%|██████████| 899k/899k [00:00<00:00, 31.7MB/s]
+[INFO|file_utils.py:1594] 2021-07-04 01:32:17,647 >> storing https://huggingface.co/facebook/bart-large/resolve/main/vocab.json in cache at /scratch/yk2516/cache/0d6fc8b2ef1860c1f8f0baff4b021e3426cc7d11b153f98e563b799603ee2f25.647b4548b6d9ea817e82e7a9231a320231a1c9ea24053cc9e758f3fe68216f05
+[INFO|file_utils.py:1602] 2021-07-04 01:32:17,648 >> creating metadata file for /scratch/yk2516/cache/0d6fc8b2ef1860c1f8f0baff4b021e3426cc7d11b153f98e563b799603ee2f25.647b4548b6d9ea817e82e7a9231a320231a1c9ea24053cc9e758f3fe68216f05
+[INFO|file_utils.py:1590] 2021-07-04 01:32:17,689 >> https://huggingface.co/facebook/bart-large/resolve/main/merges.txt not found in cache or force_download set to True, downloading to /scratch/yk2516/cache/tmp_r7pjlni
+Downloading:   0%|          | 0.00/456k [00:00<?, ?B/s]Downloading: 100%|██████████| 456k/456k [00:00<00:00, 20.7MB/s]
+[INFO|file_utils.py:1594] 2021-07-04 01:32:17,755 >> storing https://huggingface.co/facebook/bart-large/resolve/main/merges.txt in cache at /scratch/yk2516/cache/6e75e35f0bdd15870c98387e13b93a8e100237eb33ad99c36277a0562bd6d850.5d12962c5ee615a4c803841266e9c3be9a691a924f72d395d3a6c6c81157788b
+[INFO|file_utils.py:1602] 2021-07-04 01:32:17,755 >> creating metadata file for /scratch/yk2516/cache/6e75e35f0bdd15870c98387e13b93a8e100237eb33ad99c36277a0562bd6d850.5d12962c5ee615a4c803841266e9c3be9a691a924f72d395d3a6c6c81157788b
+[INFO|file_utils.py:1590] 2021-07-04 01:32:17,798 >> https://huggingface.co/facebook/bart-large/resolve/main/tokenizer.json not found in cache or force_download set to True, downloading to /scratch/yk2516/cache/tmp6ywl4_ey
+Downloading:   0%|          | 0.00/1.36M [00:00<?, ?B/s]Downloading: 100%|██████████| 1.36M/1.36M [00:00<00:00, 37.1MB/s]
+[INFO|file_utils.py:1594] 2021-07-04 01:32:17,885 >> storing https://huggingface.co/facebook/bart-large/resolve/main/tokenizer.json in cache at /scratch/yk2516/cache/d94f53c8851dcda40774f97280e634b94b721a58e71bcc152b5f51d0d49a046a.fc9576039592f026ad76a1c231b89aee8668488c671dfbe6616bab2ed298d730
+[INFO|file_utils.py:1602] 2021-07-04 01:32:17,885 >> creating metadata file for /scratch/yk2516/cache/d94f53c8851dcda40774f97280e634b94b721a58e71bcc152b5f51d0d49a046a.fc9576039592f026ad76a1c231b89aee8668488c671dfbe6616bab2ed298d730
+[INFO|tokenization_utils_base.py:1717] 2021-07-04 01:32:18,012 >> loading file https://huggingface.co/facebook/bart-large/resolve/main/vocab.json from cache at /scratch/yk2516/cache/0d6fc8b2ef1860c1f8f0baff4b021e3426cc7d11b153f98e563b799603ee2f25.647b4548b6d9ea817e82e7a9231a320231a1c9ea24053cc9e758f3fe68216f05
+[INFO|tokenization_utils_base.py:1717] 2021-07-04 01:32:18,012 >> loading file https://huggingface.co/facebook/bart-large/resolve/main/merges.txt from cache at /scratch/yk2516/cache/6e75e35f0bdd15870c98387e13b93a8e100237eb33ad99c36277a0562bd6d850.5d12962c5ee615a4c803841266e9c3be9a691a924f72d395d3a6c6c81157788b
+[INFO|tokenization_utils_base.py:1717] 2021-07-04 01:32:18,012 >> loading file https://huggingface.co/facebook/bart-large/resolve/main/tokenizer.json from cache at /scratch/yk2516/cache/d94f53c8851dcda40774f97280e634b94b721a58e71bcc152b5f51d0d49a046a.fc9576039592f026ad76a1c231b89aee8668488c671dfbe6616bab2ed298d730
+[INFO|tokenization_utils_base.py:1717] 2021-07-04 01:32:18,012 >> loading file https://huggingface.co/facebook/bart-large/resolve/main/added_tokens.json from cache at None
+[INFO|tokenization_utils_base.py:1717] 2021-07-04 01:32:18,012 >> loading file https://huggingface.co/facebook/bart-large/resolve/main/special_tokens_map.json from cache at None
+[INFO|tokenization_utils_base.py:1717] 2021-07-04 01:32:18,012 >> loading file https://huggingface.co/facebook/bart-large/resolve/main/tokenizer_config.json from cache at /scratch/yk2516/cache/1abf196c889c24daca2909359ca2090e5fcbfa21a9ea36d763f70adbafb500d7.67d01b18f2079bd75eac0b2f2e7235768c7f26bd728e7a855a1c5acae01a91a8
+[INFO|file_utils.py:1590] 2021-07-04 01:32:18,114 >> https://huggingface.co/facebook/bart-large/resolve/main/pytorch_model.bin not found in cache or force_download set to True, downloading to /scratch/yk2516/cache/tmp7en9caby
+Downloading:   0%|          | 0.00/1.02G [00:00<?, ?B/s]Downloading:   1%|          | 6.63M/1.02G [00:00<00:21, 48.0MB/s]Downloading:   1%|          | 10.1M/1.02G [00:00<00:23, 43.1MB/s]Downloading:   2%|▏         | 16.8M/1.02G [00:00<00:21, 46.1MB/s]Downloading:   2%|▏         | 25.2M/1.02G [00:00<00:19, 50.4MB/s]Downloading:   3%|▎         | 32.9M/1.02G [00:00<00:17, 56.3MB/s]Downloading:   4%|▎         | 38.1M/1.02G [00:00<00:20, 48.5MB/s]Downloading:   4%|▍         | 42.8M/1.02G [00:00<00:22, 43.4MB/s]Downloading:   5%|▌         | 50.9M/1.02G [00:00<00:19, 50.4MB/s]Downloading:   6%|▌         | 56.4M/1.02G [00:01<00:25, 37.4MB/s]Downloading:   6%|▌         | 61.0M/1.02G [00:01<00:45, 20.9MB/s]Downloading:   6%|▋         | 65.7M/1.02G [00:01<00:43, 21.7MB/s]Downloading:   7%|▋         | 68.9M/1.02G [00:02<01:01, 15.5MB/s]Downloading:   7%|▋         | 75.3M/1.02G [00:02<00:54, 17.3MB/s]Downloading:   8%|▊         | 77.7M/1.02G [00:02<00:51, 18.1MB/s]Downloading:   8%|▊         | 83.9M/1.02G [00:02<00:40, 22.9MB/s]Downloading:   9%|▉         | 92.3M/1.02G [00:02<00:33, 27.5MB/s]Downloading:  10%|▉         | 101M/1.02G [00:03<00:28, 31.7MB/s] Downloading:  10%|█         | 105M/1.02G [00:03<00:36, 25.0MB/s]Downloading:  11%|█         | 109M/1.02G [00:03<00:31, 28.6MB/s]Downloading:  11%|█▏        | 116M/1.02G [00:03<00:26, 33.8MB/s]Downloading:  12%|█▏        | 120M/1.02G [00:04<01:10, 12.7MB/s]Downloading:  13%|█▎        | 133M/1.02G [00:04<00:50, 17.4MB/s]Downloading:  14%|█▍        | 145M/1.02G [00:04<00:37, 23.5MB/s]Downloading:  15%|█▌        | 154M/1.02G [00:05<00:43, 20.0MB/s]Downloading:  16%|█▋        | 167M/1.02G [00:05<00:31, 26.8MB/s]Downloading:  18%|█▊        | 180M/1.02G [00:05<00:23, 35.1MB/s]Downloading:  19%|█▊        | 189M/1.02G [00:05<00:27, 29.6MB/s]Downloading:  20%|█▉        | 202M/1.02G [00:05<00:21, 38.5MB/s]Downloading:  21%|██        | 215M/1.02G [00:05<00:16, 48.8MB/s]Downloading:  22%|██▏       | 226M/1.02G [00:06<00:13, 56.7MB/s]Downloading:  23%|██▎       | 236M/1.02G [00:06<00:15, 51.8MB/s]Downloading:  24%|██▍       | 245M/1.02G [00:06<00:15, 49.3MB/s]Downloading:  25%|██▍       | 252M/1.02G [00:06<00:14, 51.5MB/s]Downloading:  25%|██▌       | 259M/1.02G [00:06<00:13, 55.8MB/s]Downloading:  26%|██▌       | 265M/1.02G [00:06<00:17, 41.9MB/s]Downloading:  27%|██▋       | 271M/1.02G [00:07<00:26, 28.4MB/s]Downloading:  27%|██▋       | 275M/1.02G [00:07<00:28, 25.7MB/s]Downloading:  27%|██▋       | 279M/1.02G [00:07<00:28, 25.6MB/s]Downloading:  28%|██▊       | 285M/1.02G [00:07<00:26, 27.3MB/s]Downloading:  29%|██▉       | 294M/1.02G [00:07<00:22, 32.2MB/s]Downloading:  30%|██▉       | 302M/1.02G [00:08<00:19, 37.2MB/s]Downloading:  30%|███       | 309M/1.02G [00:08<00:16, 43.5MB/s]Downloading:  31%|███       | 315M/1.02G [00:08<00:16, 42.8MB/s]Downloading:  31%|███▏      | 319M/1.02G [00:08<00:20, 34.8MB/s]Downloading:  32%|███▏      | 327M/1.02G [00:08<00:18, 37.2MB/s]Downloading:  33%|███▎      | 336M/1.02G [00:08<00:15, 43.0MB/s]Downloading:  33%|███▎      | 341M/1.02G [00:08<00:17, 38.8MB/s]Downloading:  34%|███▍      | 348M/1.02G [00:09<00:14, 45.2MB/s]Downloading:  35%|███▍      | 353M/1.02G [00:09<00:16, 40.9MB/s]Downloading:  35%|███▌      | 360M/1.02G [00:09<00:14, 46.4MB/s]Downloading:  36%|███▌      | 365M/1.02G [00:09<00:14, 45.0MB/s]Downloading:  36%|███▋      | 370M/1.02G [00:09<00:24, 26.5MB/s]Downloading:  37%|███▋      | 376M/1.02G [00:09<00:21, 29.7MB/s]Downloading:  37%|███▋      | 380M/1.02G [00:10<00:20, 30.6MB/s]Downloading:  38%|███▊      | 385M/1.02G [00:10<00:18, 33.7MB/s]Downloading:  38%|███▊      | 389M/1.02G [00:10<00:17, 35.9MB/s]Downloading:  39%|███▊      | 393M/1.02G [00:10<00:18, 33.5MB/s]Downloading:  39%|███▉      | 399M/1.02G [00:10<00:15, 39.2MB/s]Downloading:  40%|███▉      | 404M/1.02G [00:10<00:16, 37.8MB/s]Downloading:  40%|████      | 411M/1.02G [00:10<00:15, 40.3MB/s]Downloading:  41%|████      | 418M/1.02G [00:10<00:14, 41.9MB/s]Downloading:  41%|████▏     | 422M/1.02G [00:11<00:22, 26.8MB/s]Downloading:  42%|████▏     | 426M/1.02G [00:11<00:20, 28.7MB/s]Downloading:  42%|████▏     | 431M/1.02G [00:11<00:17, 33.0MB/s]Downloading:  43%|████▎     | 437M/1.02G [00:11<00:15, 37.9MB/s]Downloading:  44%|████▎     | 445M/1.02G [00:11<00:15, 37.0MB/s]Downloading:  44%|████▍     | 450M/1.02G [00:11<00:14, 40.5MB/s]Downloading:  45%|████▍     | 454M/1.02G [00:12<00:15, 36.0MB/s]Downloading:  45%|████▌     | 461M/1.02G [00:12<00:13, 42.1MB/s]Downloading:  46%|████▌     | 466M/1.02G [00:12<00:12, 42.7MB/s]Downloading:  46%|████▌     | 471M/1.02G [00:12<00:13, 41.6MB/s]Downloading:  47%|████▋     | 478M/1.02G [00:12<00:13, 41.4MB/s]Downloading:  48%|████▊     | 486M/1.02G [00:12<00:13, 41.0MB/s]Downloading:  48%|████▊     | 490M/1.02G [00:13<00:18, 29.1MB/s]Downloading:  48%|████▊     | 494M/1.02G [00:13<00:21, 24.8MB/s]Downloading:  49%|████▉     | 497M/1.02G [00:13<00:19, 27.0MB/s]Downloading:  49%|████▉     | 503M/1.02G [00:13<00:16, 31.7MB/s]Downloading:  50%|█████     | 512M/1.02G [00:13<00:14, 35.9MB/s]Downloading:  51%|█████     | 520M/1.02G [00:13<00:11, 43.2MB/s]Downloading:  52%|█████▏    | 528M/1.02G [00:13<00:10, 48.4MB/s]Downloading:  53%|█████▎    | 537M/1.02G [00:13<00:09, 50.9MB/s]Downloading:  53%|█████▎    | 544M/1.02G [00:14<00:13, 35.6MB/s]Downloading:  54%|█████▍    | 548M/1.02G [00:14<00:16, 29.4MB/s]Downloading:  54%|█████▍    | 554M/1.02G [00:14<00:15, 30.0MB/s]Downloading:  55%|█████▌    | 562M/1.02G [00:14<00:13, 34.8MB/s]Downloading:  56%|█████▌    | 566M/1.02G [00:14<00:12, 35.2MB/s]Downloading:  56%|█████▌    | 570M/1.02G [00:15<00:16, 27.8MB/s]Downloading:  56%|█████▋    | 574M/1.02G [00:15<00:15, 28.1MB/s]Downloading:  57%|█████▋    | 577M/1.02G [00:15<00:14, 30.0MB/s]Downloading:  57%|█████▋    | 581M/1.02G [00:15<00:14, 30.1MB/s]Downloading:  58%|█████▊    | 587M/1.02G [00:15<00:13, 31.6MB/s]Downloading:  58%|█████▊    | 592M/1.02G [00:15<00:12, 33.6MB/s]Downloading:  58%|█████▊    | 595M/1.02G [00:15<00:15, 26.8MB/s]Downloading:  59%|█████▉    | 599M/1.02G [00:16<00:14, 29.5MB/s]Downloading:  59%|█████▉    | 604M/1.02G [00:16<00:12, 33.4MB/s]Downloading:  60%|██████    | 612M/1.02G [00:16<00:11, 35.0MB/s]Downloading:  61%|██████    | 621M/1.02G [00:16<00:09, 41.6MB/s]Downloading:  62%|██████▏   | 629M/1.02G [00:16<00:08, 44.6MB/s]Downloading:  63%|██████▎   | 638M/1.02G [00:16<00:08, 47.4MB/s]Downloading:  63%|██████▎   | 646M/1.02G [00:16<00:07, 48.5MB/s]Downloading:  64%|██████▍   | 653M/1.02G [00:17<00:07, 51.6MB/s]Downloading:  65%|██████▍   | 658M/1.02G [00:17<00:08, 44.5MB/s]Downloading:  65%|██████▌   | 663M/1.02G [00:17<00:09, 37.8MB/s]Downloading:  66%|██████▌   | 671M/1.02G [00:17<00:08, 39.4MB/s]Downloading:  67%|██████▋   | 678M/1.02G [00:17<00:08, 38.1MB/s]Downloading:  67%|██████▋   | 682M/1.02G [00:17<00:09, 36.2MB/s]Downloading:  68%|██████▊   | 688M/1.02G [00:18<00:08, 41.1MB/s]Downloading:  68%|██████▊   | 694M/1.02G [00:18<00:08, 38.5MB/s]Downloading:  69%|██████▊   | 699M/1.02G [00:18<00:08, 36.4MB/s]Downloading:  69%|██████▉   | 705M/1.02G [00:18<00:08, 36.7MB/s]Downloading:  70%|██████▉   | 711M/1.02G [00:18<00:07, 40.0MB/s]Downloading:  70%|███████   | 715M/1.02G [00:18<00:08, 37.1MB/s]Downloading:  71%|███████   | 720M/1.02G [00:18<00:07, 38.3MB/s]Downloading:  71%|███████   | 724M/1.02G [00:18<00:07, 38.3MB/s]Downloading:  72%|███████▏  | 730M/1.02G [00:19<00:07, 39.9MB/s]Downloading:  72%|███████▏  | 734M/1.02G [00:19<00:07, 38.2MB/s]Downloading:  72%|███████▏  | 738M/1.02G [00:19<00:07, 39.1MB/s]Downloading:  73%|███████▎  | 745M/1.02G [00:19<00:06, 40.5MB/s]Downloading:  74%|███████▎  | 749M/1.02G [00:19<00:07, 38.1MB/s]Downloading:  74%|███████▍  | 755M/1.02G [00:19<00:06, 43.2MB/s]Downloading:  75%|███████▍  | 760M/1.02G [00:19<00:05, 44.4MB/s]Downloading:  75%|███████▌  | 765M/1.02G [00:19<00:06, 41.2MB/s]Downloading:  76%|███████▌  | 772M/1.02G [00:20<00:05, 45.2MB/s]Downloading:  77%|███████▋  | 780M/1.02G [00:20<00:04, 49.6MB/s]Downloading:  77%|███████▋  | 789M/1.02G [00:20<00:04, 49.8MB/s]Downloading:  78%|███████▊  | 797M/1.02G [00:20<00:04, 49.6MB/s]Downloading:  79%|███████▉  | 805M/1.02G [00:20<00:04, 51.7MB/s]Downloading:  80%|███████▉  | 814M/1.02G [00:20<00:04, 49.7MB/s]Downloading:  81%|████████  | 821M/1.02G [00:20<00:03, 55.2MB/s]Downloading:  81%|████████  | 827M/1.02G [00:21<00:03, 52.8MB/s]Downloading:  82%|████████▏ | 832M/1.02G [00:21<00:03, 46.6MB/s]Downloading:  82%|████████▏ | 837M/1.02G [00:21<00:04, 40.9MB/s]Downloading:  83%|████████▎ | 842M/1.02G [00:21<00:05, 32.4MB/s]Downloading:  83%|████████▎ | 847M/1.02G [00:21<00:04, 35.2MB/s]Downloading:  84%|████████▍ | 856M/1.02G [00:21<00:04, 39.5MB/s]Downloading:  84%|████████▍ | 860M/1.02G [00:22<00:04, 37.8MB/s]Downloading:  85%|████████▍ | 864M/1.02G [00:22<00:04, 33.4MB/s]Downloading:  86%|████████▌ | 872M/1.02G [00:22<00:03, 39.1MB/s]Downloading:  86%|████████▋ | 881M/1.02G [00:22<00:03, 41.0MB/s]Downloading:  87%|████████▋ | 889M/1.02G [00:22<00:02, 44.0MB/s]Downloading:  88%|████████▊ | 898M/1.02G [00:22<00:02, 45.9MB/s]Downloading:  89%|████████▉ | 906M/1.02G [00:22<00:02, 48.7MB/s]Downloading:  90%|████████▉ | 913M/1.02G [00:23<00:01, 53.8MB/s]Downloading:  90%|█████████ | 919M/1.02G [00:23<00:02, 47.9MB/s]Downloading:  91%|█████████ | 924M/1.02G [00:23<00:02, 45.5MB/s]Downloading:  91%|█████████▏| 931M/1.02G [00:23<00:01, 50.0MB/s]Downloading:  92%|█████████▏| 938M/1.02G [00:23<00:01, 45.0MB/s]Downloading:  93%|█████████▎| 943M/1.02G [00:23<00:01, 39.1MB/s]Downloading:  93%|█████████▎| 948M/1.02G [00:23<00:01, 41.1MB/s]Downloading:  94%|█████████▍| 956M/1.02G [00:24<00:01, 42.2MB/s]Downloading:  94%|█████████▍| 961M/1.02G [00:24<00:01, 39.8MB/s]Downloading:  95%|█████████▍| 965M/1.02G [00:24<00:01, 32.2MB/s]Downloading:  96%|█████████▌| 973M/1.02G [00:24<00:01, 36.1MB/s]Downloading:  96%|█████████▌| 980M/1.02G [00:24<00:00, 41.6MB/s]Downloading:  97%|█████████▋| 985M/1.02G [00:24<00:00, 34.7MB/s]Downloading:  97%|█████████▋| 990M/1.02G [00:24<00:00, 38.8MB/s]Downloading:  98%|█████████▊| 998M/1.02G [00:25<00:00, 42.9MB/s]Downloading:  98%|█████████▊| 1.00G/1.02G [00:25<00:00, 41.7MB/s]Downloading:  99%|█████████▉| 1.01G/1.02G [00:25<00:00, 30.8MB/s]Downloading:  99%|█████████▉| 1.01G/1.02G [00:25<00:00, 33.8MB/s]Downloading: 100%|█████████▉| 1.02G/1.02G [00:25<00:00, 32.3MB/s]Downloading: 100%|██████████| 1.02G/1.02G [00:25<00:00, 39.6MB/s]
+[INFO|file_utils.py:1594] 2021-07-04 01:32:46,651 >> storing https://huggingface.co/facebook/bart-large/resolve/main/pytorch_model.bin in cache at /scratch/yk2516/cache/d065edfe6954baf0b989a2063b26eb07e8c4d0b19354b5c74af9a51f5518df6e.6ca4df1a6ec59aa763989ceec10dff41dde19f0f0824b9f5d3fcd35a8abffdb2
+[INFO|file_utils.py:1602] 2021-07-04 01:32:46,652 >> creating metadata file for /scratch/yk2516/cache/d065edfe6954baf0b989a2063b26eb07e8c4d0b19354b5c74af9a51f5518df6e.6ca4df1a6ec59aa763989ceec10dff41dde19f0f0824b9f5d3fcd35a8abffdb2
+[INFO|modeling_utils.py:1161] 2021-07-04 01:32:46,653 >> loading weights file https://huggingface.co/facebook/bart-large/resolve/main/pytorch_model.bin from cache at /scratch/yk2516/cache/d065edfe6954baf0b989a2063b26eb07e8c4d0b19354b5c74af9a51f5518df6e.6ca4df1a6ec59aa763989ceec10dff41dde19f0f0824b9f5d3fcd35a8abffdb2
+[INFO|modeling_utils.py:1345] 2021-07-04 01:32:50,824 >> All model checkpoint weights were used when initializing BartForConditionalGeneration.
+
+[INFO|modeling_utils.py:1353] 2021-07-04 01:32:50,825 >> All the weights of BartForConditionalGeneration were initialized from the model checkpoint at facebook/bart-large.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use BartForConditionalGeneration for predictions without further training.
+Traceback (most recent call last):
+  File "run_summarization.py", line 621, in <module>
+    main()
+  File "run_summarization.py", line 439, in main
+    with training_args.main_process_first(desc="train dataset map pre-processing"):
+AttributeError: 'Seq2SeqTrainingArguments' object has no attribute 'main_process_first'

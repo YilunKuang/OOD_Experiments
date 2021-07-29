@@ -1,0 +1,303 @@
+Running - fine tune BART on gigaword
+07/04/2021 01:51:55 - WARNING - __main__ - Process rank: -1, device: cuda:0, n_gpu: 1distributed training: False, 16-bits training: False
+07/04/2021 01:51:55 - INFO - __main__ - Training/evaluation parameters Seq2SeqTrainingArguments(
+_n_gpu=1,
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_pin_memory=True,
+ddp_find_unused_parameters=None,
+debug=[],
+deepspeed=None,
+disable_tqdm=False,
+do_eval=True,
+do_predict=False,
+do_train=True,
+eval_accumulation_steps=None,
+eval_steps=500,
+evaluation_strategy=IntervalStrategy.NO,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+gradient_accumulation_steps=1,
+greater_is_better=None,
+group_by_length=False,
+ignore_data_skip=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=5e-05,
+length_column_name=length,
+load_best_model_at_end=False,
+local_rank=-1,
+log_level=-1,
+log_level_replica=-1,
+log_on_each_node=True,
+logging_dir=/scratch/yk2516/OOD_Text_Generation/BART-Gigaword/runs/Jul04_01-51-55_gr009.nyu.cluster,
+logging_first_step=False,
+logging_steps=500,
+logging_strategy=IntervalStrategy.STEPS,
+lr_scheduler_type=SchedulerType.LINEAR,
+max_grad_norm=1.0,
+max_steps=-1,
+metric_for_best_model=None,
+mp_parameters=,
+no_cuda=False,
+num_train_epochs=3.0,
+output_dir=/scratch/yk2516/OOD_Text_Generation/BART-Gigaword,
+overwrite_output_dir=True,
+past_index=-1,
+per_device_eval_batch_size=4,
+per_device_train_batch_size=4,
+predict_with_generate=True,
+prediction_loss_only=False,
+push_to_hub=False,
+push_to_hub_model_id=BART-Gigaword,
+push_to_hub_organization=None,
+push_to_hub_token=None,
+remove_unused_columns=True,
+report_to=[],
+resume_from_checkpoint=None,
+run_name=/scratch/yk2516/OOD_Text_Generation/BART-Gigaword,
+save_on_each_node=False,
+save_steps=500,
+save_strategy=IntervalStrategy.STEPS,
+save_total_limit=None,
+seed=42,
+sharded_ddp=[],
+skip_memory_metrics=True,
+sortish_sampler=False,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+use_legacy_prediction_loop=False,
+warmup_ratio=0.0,
+warmup_steps=0,
+weight_decay=0.0,
+)
+07/04/2021 01:51:56 - INFO - datasets.load - Checking /home/yk2516/.cache/huggingface/datasets/downloads/eee26bab3c73e41016f199c2b7d511ca803e60669aee8e508b38d2ab3560866d.bfa3aa8ee979655eb16623e3740d853290b986b87b0f449aaf24a1717fc52c33.py for additional imports.
+07/04/2021 01:51:56 - INFO - datasets.utils.filelock - Lock 23312669393104 acquired on /home/yk2516/.cache/huggingface/datasets/downloads/eee26bab3c73e41016f199c2b7d511ca803e60669aee8e508b38d2ab3560866d.bfa3aa8ee979655eb16623e3740d853290b986b87b0f449aaf24a1717fc52c33.py.lock
+07/04/2021 01:51:56 - INFO - datasets.load - Found main folder for dataset https://raw.githubusercontent.com/huggingface/datasets/1.8.0/datasets/gigaword/gigaword.py at /home/yk2516/.cache/huggingface/modules/datasets_modules/datasets/gigaword
+07/04/2021 01:51:56 - INFO - datasets.load - Found specific version folder for dataset https://raw.githubusercontent.com/huggingface/datasets/1.8.0/datasets/gigaword/gigaword.py at /home/yk2516/.cache/huggingface/modules/datasets_modules/datasets/gigaword/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6
+07/04/2021 01:51:56 - INFO - datasets.load - Found script file from https://raw.githubusercontent.com/huggingface/datasets/1.8.0/datasets/gigaword/gigaword.py to /home/yk2516/.cache/huggingface/modules/datasets_modules/datasets/gigaword/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6/gigaword.py
+07/04/2021 01:51:56 - INFO - datasets.load - Found dataset infos file from https://raw.githubusercontent.com/huggingface/datasets/1.8.0/datasets/gigaword/dataset_infos.json to /home/yk2516/.cache/huggingface/modules/datasets_modules/datasets/gigaword/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6/dataset_infos.json
+07/04/2021 01:51:56 - INFO - datasets.load - Found metadata file for dataset https://raw.githubusercontent.com/huggingface/datasets/1.8.0/datasets/gigaword/gigaword.py at /home/yk2516/.cache/huggingface/modules/datasets_modules/datasets/gigaword/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6/gigaword.json
+07/04/2021 01:51:56 - INFO - datasets.utils.filelock - Lock 23312669393104 released on /home/yk2516/.cache/huggingface/datasets/downloads/eee26bab3c73e41016f199c2b7d511ca803e60669aee8e508b38d2ab3560866d.bfa3aa8ee979655eb16623e3740d853290b986b87b0f449aaf24a1717fc52c33.py.lock
+07/04/2021 01:51:56 - WARNING - datasets.builder - Using custom data configuration default
+07/04/2021 01:51:56 - INFO - datasets.info - Loading Dataset Infos from /home/yk2516/.cache/huggingface/modules/datasets_modules/datasets/gigaword/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6
+07/04/2021 01:51:56 - INFO - datasets.utils.filelock - Lock 23310668352720 acquired on /scratch/yk2516/cache/_scratch_yk2516_cache_gigaword_default_1.2.0_ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6.lock
+07/04/2021 01:51:56 - INFO - datasets.builder - Overwrite dataset info from restored data version.
+07/04/2021 01:51:56 - INFO - datasets.info - Loading Dataset info from /scratch/yk2516/cache/gigaword/default/1.2.0/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6
+07/04/2021 01:51:56 - INFO - datasets.utils.filelock - Lock 23310668352720 released on /scratch/yk2516/cache/_scratch_yk2516_cache_gigaword_default_1.2.0_ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6.lock
+07/04/2021 01:51:56 - INFO - datasets.utils.filelock - Lock 23310668353392 acquired on /scratch/yk2516/cache/_scratch_yk2516_cache_gigaword_default_1.2.0_ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6.lock
+07/04/2021 01:51:56 - WARNING - datasets.builder - Reusing dataset gigaword (/scratch/yk2516/cache/gigaword/default/1.2.0/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6)
+07/04/2021 01:51:56 - INFO - datasets.info - Loading Dataset info from /scratch/yk2516/cache/gigaword/default/1.2.0/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6
+07/04/2021 01:51:56 - INFO - datasets.utils.filelock - Lock 23310668353392 released on /scratch/yk2516/cache/_scratch_yk2516_cache_gigaword_default_1.2.0_ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6.lock
+07/04/2021 01:51:56 - INFO - datasets.builder - Constructing Dataset for split train, validation, test, from /scratch/yk2516/cache/gigaword/default/1.2.0/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6
+  0%|          | 0/3 [00:00<?, ?it/s] 33%|███▎      | 1/3 [00:00<00:00,  2.20it/s] 67%|██████▋   | 2/3 [00:00<00:00,  2.82it/s]100%|██████████| 3/3 [00:00<00:00,  5.08it/s]
+[INFO|configuration_utils.py:530] 2021-07-04 01:51:57,549 >> loading configuration file https://huggingface.co/facebook/bart-large/resolve/main/config.json from cache at /scratch/yk2516/cache/3f12fb71b844fcb7d591fdd4e55027da90d7b5dd6aa5430ad00ec6d76585f26c.58d5dda9f4e9f44e980adb867b66d9e0cbe3e0c05360cefe3cd86f5db4fff042
+[INFO|configuration_utils.py:566] 2021-07-04 01:51:57,550 >> Model config BartConfig {
+  "activation_dropout": 0.1,
+  "activation_function": "gelu",
+  "add_bias_logits": false,
+  "add_final_layer_norm": false,
+  "architectures": [
+    "BartModel"
+  ],
+  "attention_dropout": 0.1,
+  "bos_token_id": 0,
+  "classif_dropout": 0.1,
+  "classifier_dropout": 0.0,
+  "d_model": 1024,
+  "decoder_attention_heads": 16,
+  "decoder_ffn_dim": 4096,
+  "decoder_layerdrop": 0.0,
+  "decoder_layers": 12,
+  "decoder_start_token_id": 2,
+  "dropout": 0.1,
+  "early_stopping": true,
+  "encoder_attention_heads": 16,
+  "encoder_ffn_dim": 4096,
+  "encoder_layerdrop": 0.0,
+  "encoder_layers": 12,
+  "eos_token_id": 2,
+  "forced_eos_token_id": 2,
+  "gradient_checkpointing": false,
+  "id2label": {
+    "0": "LABEL_0",
+    "1": "LABEL_1",
+    "2": "LABEL_2"
+  },
+  "init_std": 0.02,
+  "is_encoder_decoder": true,
+  "label2id": {
+    "LABEL_0": 0,
+    "LABEL_1": 1,
+    "LABEL_2": 2
+  },
+  "max_position_embeddings": 1024,
+  "model_type": "bart",
+  "no_repeat_ngram_size": 3,
+  "normalize_before": false,
+  "num_beams": 4,
+  "num_hidden_layers": 12,
+  "pad_token_id": 1,
+  "scale_embedding": false,
+  "task_specific_params": {
+    "summarization": {
+      "length_penalty": 1.0,
+      "max_length": 128,
+      "min_length": 12,
+      "num_beams": 4
+    },
+    "summarization_cnn": {
+      "length_penalty": 2.0,
+      "max_length": 142,
+      "min_length": 56,
+      "num_beams": 4
+    },
+    "summarization_xsum": {
+      "length_penalty": 1.0,
+      "max_length": 62,
+      "min_length": 11,
+      "num_beams": 6
+    }
+  },
+  "transformers_version": "4.8.2",
+  "use_cache": true,
+  "vocab_size": 50265
+}
+
+[INFO|configuration_utils.py:530] 2021-07-04 01:51:57,637 >> loading configuration file https://huggingface.co/facebook/bart-large/resolve/main/config.json from cache at /scratch/yk2516/cache/3f12fb71b844fcb7d591fdd4e55027da90d7b5dd6aa5430ad00ec6d76585f26c.58d5dda9f4e9f44e980adb867b66d9e0cbe3e0c05360cefe3cd86f5db4fff042
+[INFO|configuration_utils.py:566] 2021-07-04 01:51:57,638 >> Model config BartConfig {
+  "activation_dropout": 0.1,
+  "activation_function": "gelu",
+  "add_bias_logits": false,
+  "add_final_layer_norm": false,
+  "architectures": [
+    "BartModel"
+  ],
+  "attention_dropout": 0.1,
+  "bos_token_id": 0,
+  "classif_dropout": 0.1,
+  "classifier_dropout": 0.0,
+  "d_model": 1024,
+  "decoder_attention_heads": 16,
+  "decoder_ffn_dim": 4096,
+  "decoder_layerdrop": 0.0,
+  "decoder_layers": 12,
+  "decoder_start_token_id": 2,
+  "dropout": 0.1,
+  "early_stopping": true,
+  "encoder_attention_heads": 16,
+  "encoder_ffn_dim": 4096,
+  "encoder_layerdrop": 0.0,
+  "encoder_layers": 12,
+  "eos_token_id": 2,
+  "forced_eos_token_id": 2,
+  "gradient_checkpointing": false,
+  "id2label": {
+    "0": "LABEL_0",
+    "1": "LABEL_1",
+    "2": "LABEL_2"
+  },
+  "init_std": 0.02,
+  "is_encoder_decoder": true,
+  "label2id": {
+    "LABEL_0": 0,
+    "LABEL_1": 1,
+    "LABEL_2": 2
+  },
+  "max_position_embeddings": 1024,
+  "model_type": "bart",
+  "no_repeat_ngram_size": 3,
+  "normalize_before": false,
+  "num_beams": 4,
+  "num_hidden_layers": 12,
+  "pad_token_id": 1,
+  "scale_embedding": false,
+  "task_specific_params": {
+    "summarization": {
+      "length_penalty": 1.0,
+      "max_length": 128,
+      "min_length": 12,
+      "num_beams": 4
+    },
+    "summarization_cnn": {
+      "length_penalty": 2.0,
+      "max_length": 142,
+      "min_length": 56,
+      "num_beams": 4
+    },
+    "summarization_xsum": {
+      "length_penalty": 1.0,
+      "max_length": 62,
+      "min_length": 11,
+      "num_beams": 6
+    }
+  },
+  "transformers_version": "4.8.2",
+  "use_cache": true,
+  "vocab_size": 50265
+}
+
+[INFO|tokenization_utils_base.py:1717] 2021-07-04 01:51:57,894 >> loading file https://huggingface.co/facebook/bart-large/resolve/main/vocab.json from cache at /scratch/yk2516/cache/0d6fc8b2ef1860c1f8f0baff4b021e3426cc7d11b153f98e563b799603ee2f25.647b4548b6d9ea817e82e7a9231a320231a1c9ea24053cc9e758f3fe68216f05
+[INFO|tokenization_utils_base.py:1717] 2021-07-04 01:51:57,894 >> loading file https://huggingface.co/facebook/bart-large/resolve/main/merges.txt from cache at /scratch/yk2516/cache/6e75e35f0bdd15870c98387e13b93a8e100237eb33ad99c36277a0562bd6d850.5d12962c5ee615a4c803841266e9c3be9a691a924f72d395d3a6c6c81157788b
+[INFO|tokenization_utils_base.py:1717] 2021-07-04 01:51:57,894 >> loading file https://huggingface.co/facebook/bart-large/resolve/main/tokenizer.json from cache at /scratch/yk2516/cache/d94f53c8851dcda40774f97280e634b94b721a58e71bcc152b5f51d0d49a046a.fc9576039592f026ad76a1c231b89aee8668488c671dfbe6616bab2ed298d730
+[INFO|tokenization_utils_base.py:1717] 2021-07-04 01:51:57,894 >> loading file https://huggingface.co/facebook/bart-large/resolve/main/added_tokens.json from cache at None
+[INFO|tokenization_utils_base.py:1717] 2021-07-04 01:51:57,894 >> loading file https://huggingface.co/facebook/bart-large/resolve/main/special_tokens_map.json from cache at None
+[INFO|tokenization_utils_base.py:1717] 2021-07-04 01:51:57,894 >> loading file https://huggingface.co/facebook/bart-large/resolve/main/tokenizer_config.json from cache at /scratch/yk2516/cache/1abf196c889c24daca2909359ca2090e5fcbfa21a9ea36d763f70adbafb500d7.67d01b18f2079bd75eac0b2f2e7235768c7f26bd728e7a855a1c5acae01a91a8
+[INFO|modeling_utils.py:1161] 2021-07-04 01:51:58,025 >> loading weights file https://huggingface.co/facebook/bart-large/resolve/main/pytorch_model.bin from cache at /scratch/yk2516/cache/d065edfe6954baf0b989a2063b26eb07e8c4d0b19354b5c74af9a51f5518df6e.6ca4df1a6ec59aa763989ceec10dff41dde19f0f0824b9f5d3fcd35a8abffdb2
+[INFO|modeling_utils.py:1345] 2021-07-04 01:52:02,409 >> All model checkpoint weights were used when initializing BartForConditionalGeneration.
+
+[INFO|modeling_utils.py:1353] 2021-07-04 01:52:02,409 >> All the weights of BartForConditionalGeneration were initialized from the model checkpoint at facebook/bart-large.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use BartForConditionalGeneration for predictions without further training.
+07/04/2021 01:52:02 - INFO - datasets.utils.filelock - Lock 23310416934800 acquired on /home/yk2516/.cache/huggingface/datasets/downloads/d1add26d91c8e217931d0a66e302493b59f00358792a4953327d8e8fca724da3.0176a9ea14f2e537f6dfc6a072a422e7075a0cf475bb3b71e493addc7d8dde62.py.lock
+07/04/2021 01:52:02 - INFO - datasets.utils.file_utils - https://raw.githubusercontent.com/huggingface/datasets/1.8.0/metrics/rouge/rouge.py not found in cache or force_download set to True, downloading to /home/yk2516/.cache/huggingface/datasets/downloads/tmpz5lei6q2
+Downloading:   0%|          | 0.00/2.17k [00:00<?, ?B/s]Downloading: 5.61kB [00:00, 4.79MB/s]                   07/04/2021 01:52:02 - INFO - datasets.utils.file_utils - storing https://raw.githubusercontent.com/huggingface/datasets/1.8.0/metrics/rouge/rouge.py in cache at /home/yk2516/.cache/huggingface/datasets/downloads/d1add26d91c8e217931d0a66e302493b59f00358792a4953327d8e8fca724da3.0176a9ea14f2e537f6dfc6a072a422e7075a0cf475bb3b71e493addc7d8dde62.py
+07/04/2021 01:52:02 - INFO - datasets.utils.file_utils - creating metadata file for /home/yk2516/.cache/huggingface/datasets/downloads/d1add26d91c8e217931d0a66e302493b59f00358792a4953327d8e8fca724da3.0176a9ea14f2e537f6dfc6a072a422e7075a0cf475bb3b71e493addc7d8dde62.py
+07/04/2021 01:52:02 - INFO - datasets.utils.filelock - Lock 23310416934800 released on /home/yk2516/.cache/huggingface/datasets/downloads/d1add26d91c8e217931d0a66e302493b59f00358792a4953327d8e8fca724da3.0176a9ea14f2e537f6dfc6a072a422e7075a0cf475bb3b71e493addc7d8dde62.py.lock
+07/04/2021 01:52:02 - INFO - datasets.load - Checking /home/yk2516/.cache/huggingface/datasets/downloads/d1add26d91c8e217931d0a66e302493b59f00358792a4953327d8e8fca724da3.0176a9ea14f2e537f6dfc6a072a422e7075a0cf475bb3b71e493addc7d8dde62.py for additional imports.
+07/04/2021 01:52:02 - INFO - datasets.utils.filelock - Lock 23310416893792 acquired on /home/yk2516/.cache/huggingface/datasets/downloads/d1add26d91c8e217931d0a66e302493b59f00358792a4953327d8e8fca724da3.0176a9ea14f2e537f6dfc6a072a422e7075a0cf475bb3b71e493addc7d8dde62.py.lock
+07/04/2021 01:52:02 - INFO - datasets.load - Creating main folder for metric https://raw.githubusercontent.com/huggingface/datasets/1.8.0/metrics/rouge/rouge.py at /home/yk2516/.cache/huggingface/modules/datasets_modules/metrics/rouge
+07/04/2021 01:52:02 - INFO - datasets.load - Creating specific version folder for metric https://raw.githubusercontent.com/huggingface/datasets/1.8.0/metrics/rouge/rouge.py at /home/yk2516/.cache/huggingface/modules/datasets_modules/metrics/rouge/2b73d5eb463209373e9d21a95decb226d4164bdca4c361b8dfad295ec82bc62e
+07/04/2021 01:52:02 - INFO - datasets.load - Copying script file from https://raw.githubusercontent.com/huggingface/datasets/1.8.0/metrics/rouge/rouge.py to /home/yk2516/.cache/huggingface/modules/datasets_modules/metrics/rouge/2b73d5eb463209373e9d21a95decb226d4164bdca4c361b8dfad295ec82bc62e/rouge.py
+07/04/2021 01:52:02 - INFO - datasets.load - Couldn't find dataset infos file at https://raw.githubusercontent.com/huggingface/datasets/1.8.0/metrics/rouge/dataset_infos.json
+07/04/2021 01:52:02 - INFO - datasets.load - Creating metadata file for metric https://raw.githubusercontent.com/huggingface/datasets/1.8.0/metrics/rouge/rouge.py at /home/yk2516/.cache/huggingface/modules/datasets_modules/metrics/rouge/2b73d5eb463209373e9d21a95decb226d4164bdca4c361b8dfad295ec82bc62e/rouge.json
+07/04/2021 01:52:02 - INFO - datasets.utils.filelock - Lock 23310416893792 released on /home/yk2516/.cache/huggingface/datasets/downloads/d1add26d91c8e217931d0a66e302493b59f00358792a4953327d8e8fca724da3.0176a9ea14f2e537f6dfc6a072a422e7075a0cf475bb3b71e493addc7d8dde62.py.lock
+
+[INFO|trainer.py:520] 2021-07-04 01:52:09,427 >> The following columns in the training set  don't have a corresponding argument in `BartForConditionalGeneration.forward` and have been ignored: summary, document.
+[INFO|trainer.py:1153] 2021-07-04 01:52:09,436 >> ***** Running training *****
+[INFO|trainer.py:1154] 2021-07-04 01:52:09,436 >>   Num examples = 0
+[INFO|trainer.py:1155] 2021-07-04 01:52:09,437 >>   Num Epochs = 3
+[INFO|trainer.py:1156] 2021-07-04 01:52:09,437 >>   Instantaneous batch size per device = 4
+[INFO|trainer.py:1157] 2021-07-04 01:52:09,437 >>   Total train batch size (w. parallel, distributed & accumulation) = 4
+[INFO|trainer.py:1158] 2021-07-04 01:52:09,437 >>   Gradient Accumulation steps = 1
+[INFO|trainer.py:1159] 2021-07-04 01:52:09,437 >>   Total optimization steps = 2852970
+  0%|          | 0/2852970 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "run_summarization.py", line 621, in <module>
+    main()
+  File "run_summarization.py", line 545, in main
+    train_result = trainer.train(resume_from_checkpoint=checkpoint)
+  File "/ext3/miniconda3/lib/python3.8/site-packages/transformers/trainer.py", line 1243, in train
+    for step, inputs in enumerate(epoch_iterator):
+  File "/ext3/miniconda3/lib/python3.8/site-packages/torch/utils/data/dataloader.py", line 517, in __next__
+    data = self._next_data()
+  File "/ext3/miniconda3/lib/python3.8/site-packages/torch/utils/data/dataloader.py", line 557, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "/ext3/miniconda3/lib/python3.8/site-packages/torch/utils/data/_utils/fetch.py", line 44, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/ext3/miniconda3/lib/python3.8/site-packages/torch/utils/data/_utils/fetch.py", line 44, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/ext3/miniconda3/lib/python3.8/site-packages/datasets/arrow_dataset.py", line 1479, in __getitem__
+    return self._getitem(
+  File "/ext3/miniconda3/lib/python3.8/site-packages/datasets/arrow_dataset.py", line 1471, in _getitem
+    pa_subtable = query_table(self._data, key, indices=self._indices if self._indices is not None else None)
+  File "/ext3/miniconda3/lib/python3.8/site-packages/datasets/formatting/formatting.py", line 365, in query_table
+    _check_valid_index_key(key, size)
+  File "/ext3/miniconda3/lib/python3.8/site-packages/datasets/formatting/formatting.py", line 308, in _check_valid_index_key
+    raise IndexError(f"Invalid key: {key} is out of bounds for size {size}")
+IndexError: Invalid key: 2479717 is out of bounds for size 0
+  0%|          | 0/2852970 [00:00<?, ?it/s]

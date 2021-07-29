@@ -1,0 +1,100 @@
+Running - fine tune BART on wikihow
+07/26/2021 06:17:30 - WARNING - __main__ -   Process rank: -1, device: cuda:0, n_gpu: 1distributed training: False, 16-bits training: False
+07/26/2021 06:17:30 - INFO - __main__ -   Training/evaluation parameters Seq2SeqTrainingArguments(
+_n_gpu=1,
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_pin_memory=True,
+ddp_find_unused_parameters=None,
+debug=[],
+deepspeed=None,
+disable_tqdm=False,
+do_eval=True,
+do_predict=False,
+do_train=True,
+eval_accumulation_steps=None,
+eval_steps=500,
+evaluation_strategy=IntervalStrategy.NO,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+gradient_accumulation_steps=1,
+greater_is_better=None,
+group_by_length=False,
+ignore_data_skip=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=5e-05,
+length_column_name=length,
+load_best_model_at_end=False,
+local_rank=-1,
+log_level=-1,
+log_level_replica=-1,
+log_on_each_node=True,
+logging_dir=/scratch/yk2516/OOD_Text_Generation/BART-Wikihow/runs/Jul26_06-17-30_gr017.nyu.cluster,
+logging_first_step=False,
+logging_steps=500,
+logging_strategy=IntervalStrategy.STEPS,
+lr_scheduler_type=SchedulerType.LINEAR,
+max_grad_norm=1.0,
+max_steps=-1,
+metric_for_best_model=None,
+mp_parameters=,
+no_cuda=False,
+num_train_epochs=3.0,
+output_dir=/scratch/yk2516/OOD_Text_Generation/BART-Wikihow,
+overwrite_output_dir=True,
+past_index=-1,
+per_device_eval_batch_size=2,
+per_device_train_batch_size=2,
+predict_with_generate=True,
+prediction_loss_only=False,
+push_to_hub=False,
+push_to_hub_model_id=BART-Wikihow,
+push_to_hub_organization=None,
+push_to_hub_token=None,
+remove_unused_columns=True,
+report_to=[],
+resume_from_checkpoint=None,
+run_name=/scratch/yk2516/OOD_Text_Generation/BART-Wikihow,
+save_on_each_node=False,
+save_steps=500,
+save_strategy=IntervalStrategy.STEPS,
+save_total_limit=None,
+seed=42,
+sharded_ddp=[],
+skip_memory_metrics=True,
+sortish_sampler=False,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+use_legacy_prediction_loop=False,
+warmup_ratio=0.0,
+warmup_steps=0,
+weight_decay=0.0,
+)
+Downloading and preparing dataset wikihow/all (download: Unknown size, generated: Unknown size, post-processed: Unknown size, total: Unknown size) to /scratch/yk2516/cache/wikihow/all/1.2.0/821393aaa1168533cef72bcfc8663f50154cf752c15a3538c9cc770f6ce0a204...
+Traceback (most recent call last):
+  File "run_summarization.py", line 612, in <module>
+    main()
+  File "run_summarization.py", line 316, in main
+    datasets = load_dataset(data_args.dataset_name, data_args.dataset_config_name, cache_dir=model_args.cache_dir)
+  File "/ext3/miniconda3/lib/python3.8/site-packages/datasets/load.py", line 856, in load_dataset
+    builder_instance.download_and_prepare(
+  File "/ext3/miniconda3/lib/python3.8/site-packages/datasets/builder.py", line 561, in download_and_prepare
+    assert (
+AssertionError: The dataset wikihow with config all requires manual data. 
+ Please follow the manual download instructions:   You need to manually download one of the wikihow files. An overview of which files to download can be seen at https://github.com/mahnazkoupaee/WikiHow-Dataset.
+  You need to download one the following two data files manually, depending on the version you want:
+    1) all: https://ucsb.app.box.com/s/ap23l8gafpezf4tq3wapr6u8241zz358 and save the file under <path/to/folder>/wikihowAll.csv
+    2) sep: https://ucsb.app.box.com/s/7yq601ijl1lzvlfu4rjdbbxforzd2oag and save the file under <path/to/folder>/wikihowSep.csv
+
+  The <path/to/folder> can e.g. be "~/manual_wikihow_data".
+
+  Wikihow can then be loaded for example using the following command `datasets.load_dataset("wikihow", "all", data_dir="<path/to/folder>")`.
+  . 
+ Manual data can be loaded with `datasets.load_dataset(wikihow, data_dir='<path/to/manual/data>')

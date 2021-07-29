@@ -1,0 +1,129 @@
+Running - fine tune BART on gigaword
+07/04/2021 01:27:27 - WARNING - __main__ - Process rank: -1, device: cuda:0, n_gpu: 1distributed training: False, 16-bits training: False
+07/04/2021 01:27:27 - INFO - __main__ - Training/evaluation parameters Seq2SeqTrainingArguments(
+_n_gpu=1,
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_pin_memory=True,
+ddp_find_unused_parameters=None,
+debug=[],
+deepspeed=None,
+disable_tqdm=False,
+do_eval=True,
+do_predict=False,
+do_train=True,
+eval_accumulation_steps=None,
+eval_steps=500,
+evaluation_strategy=IntervalStrategy.NO,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+gradient_accumulation_steps=1,
+greater_is_better=None,
+group_by_length=False,
+ignore_data_skip=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=5e-05,
+length_column_name=length,
+load_best_model_at_end=False,
+local_rank=-1,
+log_level=-1,
+log_level_replica=-1,
+log_on_each_node=True,
+logging_dir=/scratch/yk2516/OOD_Text_Generation/BART-Gigaword/runs/Jul04_01-27-27_gr034.nyu.cluster,
+logging_first_step=False,
+logging_steps=500,
+logging_strategy=IntervalStrategy.STEPS,
+lr_scheduler_type=SchedulerType.LINEAR,
+max_grad_norm=1.0,
+max_steps=-1,
+metric_for_best_model=None,
+mp_parameters=,
+no_cuda=False,
+num_train_epochs=3.0,
+output_dir=/scratch/yk2516/OOD_Text_Generation/BART-Gigaword,
+overwrite_output_dir=True,
+past_index=-1,
+per_device_eval_batch_size=4,
+per_device_train_batch_size=4,
+predict_with_generate=True,
+prediction_loss_only=False,
+push_to_hub=False,
+push_to_hub_model_id=BART-Gigaword,
+push_to_hub_organization=None,
+push_to_hub_token=None,
+remove_unused_columns=True,
+report_to=[],
+resume_from_checkpoint=None,
+run_name=/scratch/yk2516/OOD_Text_Generation/BART-Gigaword,
+save_on_each_node=False,
+save_steps=500,
+save_strategy=IntervalStrategy.STEPS,
+save_total_limit=None,
+seed=42,
+sharded_ddp=[],
+skip_memory_metrics=True,
+sortish_sampler=False,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+use_legacy_prediction_loop=False,
+warmup_ratio=0.0,
+warmup_steps=0,
+weight_decay=0.0,
+)
+07/04/2021 01:27:27 - INFO - datasets.load - Checking /home/yk2516/.cache/huggingface/datasets/downloads/eee26bab3c73e41016f199c2b7d511ca803e60669aee8e508b38d2ab3560866d.bfa3aa8ee979655eb16623e3740d853290b986b87b0f449aaf24a1717fc52c33.py for additional imports.
+07/04/2021 01:27:27 - INFO - datasets.utils.filelock - Lock 23284246618368 acquired on /home/yk2516/.cache/huggingface/datasets/downloads/eee26bab3c73e41016f199c2b7d511ca803e60669aee8e508b38d2ab3560866d.bfa3aa8ee979655eb16623e3740d853290b986b87b0f449aaf24a1717fc52c33.py.lock
+07/04/2021 01:27:27 - INFO - datasets.load - Found main folder for dataset https://raw.githubusercontent.com/huggingface/datasets/1.8.0/datasets/gigaword/gigaword.py at /home/yk2516/.cache/huggingface/modules/datasets_modules/datasets/gigaword
+07/04/2021 01:27:27 - INFO - datasets.load - Found specific version folder for dataset https://raw.githubusercontent.com/huggingface/datasets/1.8.0/datasets/gigaword/gigaword.py at /home/yk2516/.cache/huggingface/modules/datasets_modules/datasets/gigaword/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6
+07/04/2021 01:27:27 - INFO - datasets.load - Found script file from https://raw.githubusercontent.com/huggingface/datasets/1.8.0/datasets/gigaword/gigaword.py to /home/yk2516/.cache/huggingface/modules/datasets_modules/datasets/gigaword/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6/gigaword.py
+07/04/2021 01:27:27 - INFO - datasets.load - Found dataset infos file from https://raw.githubusercontent.com/huggingface/datasets/1.8.0/datasets/gigaword/dataset_infos.json to /home/yk2516/.cache/huggingface/modules/datasets_modules/datasets/gigaword/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6/dataset_infos.json
+07/04/2021 01:27:27 - INFO - datasets.load - Found metadata file for dataset https://raw.githubusercontent.com/huggingface/datasets/1.8.0/datasets/gigaword/gigaword.py at /home/yk2516/.cache/huggingface/modules/datasets_modules/datasets/gigaword/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6/gigaword.json
+07/04/2021 01:27:27 - INFO - datasets.utils.filelock - Lock 23284246618368 released on /home/yk2516/.cache/huggingface/datasets/downloads/eee26bab3c73e41016f199c2b7d511ca803e60669aee8e508b38d2ab3560866d.bfa3aa8ee979655eb16623e3740d853290b986b87b0f449aaf24a1717fc52c33.py.lock
+07/04/2021 01:27:27 - WARNING - datasets.builder - Using custom data configuration default
+07/04/2021 01:27:27 - INFO - datasets.info - Loading Dataset Infos from /home/yk2516/.cache/huggingface/modules/datasets_modules/datasets/gigaword/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6
+07/04/2021 01:27:27 - INFO - datasets.utils.filelock - Lock 23282245577984 acquired on /scratch/yk2516/cache/_scratch_yk2516_cache_gigaword_default_1.2.0_ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6.lock
+07/04/2021 01:27:27 - INFO - datasets.builder - Overwrite dataset info from restored data version.
+07/04/2021 01:27:27 - INFO - datasets.info - Loading Dataset info from /scratch/yk2516/cache/gigaword/default/1.2.0/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6
+07/04/2021 01:27:27 - INFO - datasets.utils.filelock - Lock 23282245577984 released on /scratch/yk2516/cache/_scratch_yk2516_cache_gigaword_default_1.2.0_ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6.lock
+07/04/2021 01:27:27 - INFO - datasets.utils.filelock - Lock 23282245577264 acquired on /scratch/yk2516/cache/_scratch_yk2516_cache_gigaword_default_1.2.0_ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6.lock
+07/04/2021 01:27:27 - WARNING - datasets.builder - Reusing dataset gigaword (/scratch/yk2516/cache/gigaword/default/1.2.0/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6)
+07/04/2021 01:27:27 - INFO - datasets.info - Loading Dataset info from /scratch/yk2516/cache/gigaword/default/1.2.0/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6
+07/04/2021 01:27:27 - INFO - datasets.utils.filelock - Lock 23282245577264 released on /scratch/yk2516/cache/_scratch_yk2516_cache_gigaword_default_1.2.0_ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6.lock
+07/04/2021 01:27:27 - INFO - datasets.builder - Constructing Dataset for split train, validation, test, from /scratch/yk2516/cache/gigaword/default/1.2.0/ea83a8b819190acac5f2dae011fad51dccf269a0604ec5dd24795b64efb424b6
+  0%|          | 0/3 [00:00<?, ?it/s]100%|██████████| 3/3 [00:00<00:00, 159.14it/s]
+[ERROR|configuration_utils.py:511] 2021-07-04 01:27:28,004 >> 404 Client Error: Not Found for url: https://huggingface.co/bart-large/resolve/main/config.json
+Traceback (most recent call last):
+  File "/ext3/miniconda3/lib/python3.8/site-packages/transformers/configuration_utils.py", line 497, in get_config_dict
+    resolved_config_file = cached_path(
+  File "/ext3/miniconda3/lib/python3.8/site-packages/transformers/file_utils.py", line 1329, in cached_path
+    output_path = get_from_cache(
+  File "/ext3/miniconda3/lib/python3.8/site-packages/transformers/file_utils.py", line 1500, in get_from_cache
+    r.raise_for_status()
+  File "/ext3/miniconda3/lib/python3.8/site-packages/requests/models.py", line 941, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://huggingface.co/bart-large/resolve/main/config.json
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "run_summarization.py", line 621, in <module>
+    main()
+  File "run_summarization.py", line 343, in main
+    config = AutoConfig.from_pretrained(
+  File "/ext3/miniconda3/lib/python3.8/site-packages/transformers/models/auto/configuration_auto.py", line 446, in from_pretrained
+    config_dict, _ = PretrainedConfig.get_config_dict(pretrained_model_name_or_path, **kwargs)
+  File "/ext3/miniconda3/lib/python3.8/site-packages/transformers/configuration_utils.py", line 517, in get_config_dict
+    raise EnvironmentError(msg)
+OSError: Can't load config for 'bart-large'. Make sure that:
+
+- 'bart-large' is a correct model identifier listed on 'https://huggingface.co/models'
+
+- or 'bart-large' is the correct path to a directory containing a config.json file
+
+
