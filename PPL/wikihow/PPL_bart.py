@@ -8,6 +8,7 @@ import argparse
 
 # Example command line input
 # python PPL_bart_xsum.py --dataset_name xsum --model_name_or_path /scratch/yk2516/OOD_Text_Generation/BART-Wikihow/checkpoint-final
+# (optional) --test_case
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--dataset_name", help="choose a dataset from wikihow, gigaword, big_patent, xsum, cnn_dailymail, billsum",
@@ -16,6 +17,9 @@ parser.add_argument("--model_name_or_path", help="choose a model_checkpoint from
                                                                                         facebook/bart-large, \
                                                                                         or /scratch/yk2516/OOD_Text_Generation/BART-Wikihow/checkpoint-final",
                     type=str)
+parser.add_argument('--test_case', help="if called, then we only iterate over the first 20 examples without \
+                                         going through the whole test set. This is for debugging only.", action='store_true')
+
 args = parser.parse_args()
 dataset_lst = ['wikihow', 'gigaword', 'big_patent', 'xsum', 'cnn_dailymail', 'billsum']
 model_checkpoint_lst = ['a1noack/bart-large-gigaword', 'facebook/bart-large', '/scratch/yk2516/OOD_Text_Generation/BART-Wikihow/checkpoint-final']
@@ -65,7 +69,12 @@ def main():
     num_words = []
     print("number of samples:", ids.shape[0])
     
-    for i in range(ids.shape[0]):
+    if args.test_case:
+        n_sample = 20
+    else:
+        n_sample = ids.shape[0]
+        
+    for i in range(n_sample):
         input_id = np.array([ids[i]])
         input_id = torch.from_numpy(input_id).to(device)
         attention_id = np.array([attention_ids[i]])
