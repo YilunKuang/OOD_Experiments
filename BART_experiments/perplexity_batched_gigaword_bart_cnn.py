@@ -6,14 +6,23 @@ from datasets import load_metric
 import numpy as np
 import argparse
 
+# Example command line input
+# python perplexity_batched_gigaword_bart_cnn.py --dataset_name xsum --model_name_or_path a1noack/bart-large-gigaword
+
 parser = argparse.ArgumentParser()
-parser.add_argument("dataset_name", help="choose a dataset from wikihow, gigaword, big_patent, xsum, cnn_dailymail, billsum",
+parser.add_argument("--dataset_name", help="choose a dataset from wikihow, gigaword, big_patent, xsum, cnn_dailymail, billsum",
+                    type=str)
+parser.add_argument("--model_name_or_path", help="choose a model_checkpoint from either a1noack/bart-large-gigaword or facebook/bart-large",
                     type=str)
 args = parser.parse_args()
 dataset_lst = ['wikihow', 'gigaword', 'big_patent', 'xsum', 'cnn_dailymail', 'billsum']
+model_checkpoint_lst = ['a1noack/bart-large-gigaword', 'facebook/bart-large']
 
 def main():
-    model_checkpoint = 'a1noack/bart-large-gigaword' #'facebook/bart-large' #'a1noack/bart-large-gigaword' #'facebook/bart-base'  #'facebook/bart-large-cnn'
+    if args.model_name_or_path not in model_checkpoint_lst:
+        raise ValueError('Please enter a valid model_name_or_path')
+    # model_checkpoint = 'a1noack/bart-large-gigaword' #'facebook/bart-large' #'a1noack/bart-large-gigaword' #'facebook/bart-base'  #'facebook/bart-large-cnn'
+    model_checkpoint = args.model_name_or_path
     tokenizer = BartTokenizerFast.from_pretrained(model_checkpoint)
     model = BartForConditionalGeneration.from_pretrained(model_checkpoint, return_dict=True)
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -21,20 +30,25 @@ def main():
     if args.dataset_name == 'wikihow':
         test = load_dataset("wikihow", "all", data_dir="/scratch/yk2516/OOD_Text_Generation/wikihow_manual", split='test', cache_dir='/scratch/yk2516/cache/')
         input_column = 'text'
-        summary_column = 'headline'
     if args.dataset_name == 'gigaword':
         test = load_dataset('gigaword', split='test',cache_dir='/scratch/yk2516/cache/')
+        input_column = 'document'
     if args.dataset_name == 'big_patent':
         test = load_dataset('big_patent', "g", split='test',cache_dir='/scratch/yk2516/cache/')
+        input_column = 'description'
     if args.dataset_name == 'xsum':
         test = load_dataset("xsum",cache_dir='/scratch/yk2516/cache/', split='test')
+        input_column = 'document'
     if args.dataset_name == 'cnn_dailymail':
         test = load_dataset(path="cnn_dailymail",name='3.0.0',split='test',cache_dir='/scratch/yk2516/cache/')
+        input_column = 'article'
     if args.dataset_name == 'billsum':
         test = load_dataset("billsum", split='test',cache_dir='/scratch/yk2516/cache/')
+        input_column = 'text'
     if args.dataset_name not in dataset_lst:
         raise ValueError('Please enter a valid dataset name')
     
+    print(model_checkpoint + ' on ' + args.dataset_name)
     print(test)
     print(model.config.max_length)
     encodings =  tokenizer(test[input_column], return_tensors='pt', padding=True, truncation=True, max_length=1024).to(device)
