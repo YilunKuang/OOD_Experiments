@@ -13,9 +13,12 @@ def compute_auroc(id_pps, ood_pps, normalize=False, return_curve=False):
         return roc_auc_score(y, scores)
 
 iid_dataset_name = 'wikihow'
-iid_file_name = '/home/nm3571/summarization/results/fine_tuned_gpt2/summary_ppl_' + iid_dataset_name + '.pkl'
+# iid_file_name = '/home/nm3571/summarization/results/fine_tuned_gpt2/summary_ppl_' + iid_dataset_name + '.pkl'
+iid_file_name = '/scratch/yk2516/OOD_Text_Generation/BART-Billsum/ppl_result/summary_ppl_billsum.pkl'
 ood_dataset_name = 'cnn_dailymail'
-ood_file_name = '/home/nm3571/summarization/results/fine_tuned_gpt2/summary_ppl_' + ood_dataset_name + '.pkl'
+# ood_file_name = '/home/nm3571/summarization/results/fine_tuned_gpt2/summary_ppl_' + ood_dataset_name + '.pkl'
+ood_file_name = '/scratch/yk2516/OOD_Text_Generation/BART-Gigaword/ppl_result/summary_ppl_xsum.pkl'
+
 iid_ppls = []
 ood_ppls = []
 with open(iid_file_name, 'rb') as f:
