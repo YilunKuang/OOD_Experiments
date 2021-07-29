@@ -8,6 +8,7 @@ import argparse
 
 # Example command line input
 # python PPL_bart_xsum.py --dataset_name xsum --model_name_or_path /scratch/yk2516/OOD_Text_Generation/BART-Wikihow/checkpoint-final
+# (optional) --test_case
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--dataset_name", help="choose a dataset from wikihow, gigaword, big_patent, xsum, cnn_dailymail, billsum",
