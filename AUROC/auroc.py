@@ -13,8 +13,8 @@ def compute_auroc(id_pps, ood_pps, normalize=False, return_curve=False):
         return roc_auc_score(y, scores)
 
 def main():
-    dataset_lst = ['wikihow', 'gigaword', 'xsum', 'billsum']#, 'big_patent', 'cnn_dailymail']
-    dataset_dir = ['Wikihow', 'Gigaword', 'XSum', 'Billsum']#, 'Big-Patent', 'CNN']
+    dataset_lst = ['wikihow', 'big_patent', 'cnn_dailymail']# ['wikihow', 'gigaword', 'xsum', 'billsum']#, ['big_patent', 'cnn_dailymail']
+    dataset_dir = ['Wikihow', 'Big-Patent', 'CNN'] #['Wikihow', 'Gigaword', 'XSum', 'Billsum']#, ['Big-Patent', 'CNN']
 
     for i in range(len(dataset_lst)):
         iid_dataset_name = 'wikihow'
